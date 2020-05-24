@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+			
+			fieldset {
+				width: 300px;
+				height: 400px;
+				border: 1px solid saddlebrown;
+			}
+			
+			input {
+				background: rgba(188, 214, 141, 0.9);
+			}
+		</style>
+		<title>Part Seven LocalStorage、SessionStorage</title>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend>Storage API</legend>
+			ID:<input id="id" type="number" /><br /> Name:
+			<input id="name" type="text" /><br />
+			<button id="btn_Add_LocalStorage">Add LocalStorage</button><br />
+			<button id="btn_Add_SessionStorage">Add SessionStorage</button><br />
+			<button id="btn_Get_LocalStorage">Get LocalStorage</button><br />
+			<button id="btn_Get_SessionStorage">Get SessionStorage</button><br />
+			<button id="btn_Remove_Name">Remove localStorage Item</button><br />
+			<button id="btn_Clear_SessionStorage">Clear SessionStorage</button><br />
+			<span id="out"></span>
+		</fieldset>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			var out = $("#out");
+
+			$(document).ready(function() {
+				if(!window.localStorage)
+					out.text("此浏览器不支持localStorage!");
+				if(!window.sessionStorage)
+					out.text("此浏览器不支持sessionStorage!");
+				$("#btn_Add_LocalStorage").click(function() {
+					localStorage.setItem("id", $("#id").val());
+					localStorage.setItem("name", $("#name").val());
+				})
+				$("#btn_Add_SessionStorage").click(function() {
+					sessionStorage.setItem("id", $("#id").val());
+					sessionStorage.setItem("name", $("#name").val());
+				})
+				$("#btn_Get_LocalStorage").click(function() {
+					out.text("");
+					for(var i = 0; i < localStorage.length; i++) {
+						var key = localStorage.key(i);
+						out.append("<br>" + key + " : " + localStorage.getItem(key));
+					}
+				})
+				$("#btn_Get_SessionStorage").click(function() {
+					out.text("");
+					for(var i = 0; i < sessionStorage.length; i++) {
+						var key = sessionStorage.key(i);
+						out.append("<br>" + key + " : " + sessionStorage.getItem(key));
+					}
+				})
+				$("#btn_Remove_Name").click(function() {
+					localStorage.removeItem("name");
+				})
+				$("#btn_Clear_SessionStorage").click(function() {
+					sessionStorage.clear();
+				})
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<title></title>
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+			
+			#D1,#D2,#D3,#D4,#D5 {
+				height: 100px;
+				width: 300px;
+				background:rgba(211, 194, 148,0.9)
+			}
+			
+			#D1 div,#D2 div,#D3 div,#D4 div,#D5 div {
+				float: left;
+				width: 50px;
+				height: 50px;
+				margin: 20px;
+				background: sandybrown;
+			}			
+		</style>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend>jQuery traversal</legend>
+			<div id="D1">
+				<div></div>
+				<div class="d1_2"></div>
+				<div></div>
+			</div><br />
+			<button>.children</button>
+			<button>.children(selector)</button>
+			<button>.find(selector)</button>
+			<hr />
+			<div id="D2">
+				<div id="d2_1">
+					<span>span</span>
+				</div>
+				<div>
+					<span>span</span>
+				</div>
+				<div>
+					<span>span</span>
+				</div>
+			</div>
+			<button>.siblings</button>
+			<button>.next</button>
+			<button>.nextAll</button>
+			<hr />
+			<div id="D3">
+				<div id="d3_1"></div>
+				<div id="d3_2"></div>
+				<div id="d3_3"></div>				
+			</div><br />
+			<button>.nextUntil</button>
+		<button>.nextUntil(selector)</button>
+		<hr />
+		<div id="D4">
+			<div></div>
+			<div></div>
+			<div id="d4_3"></div>
+		</div>
+		<button>.prev</button>
+		<button>.prevAll</button>
+		<hr />
+		<div id="D5">
+			<div id="d5_1"></div>
+			<div></div>
+			<div></div>
+		</div><br />
+		<button>.parent</button>
+		<button>.parents</button>
+		</fieldset>
+		
+		<script>
+			$(document).ready(function() {
+				$("button:eq(0)").click(function() {
+					$("#D1").children().css("border", "2px solid white");
+				})
+				$("button:eq(1)").click(function() {
+					$("#D1").children(".d1_2").css("background-color", "rgb(108, 83, 60)");
+				})
+				$("button:eq(2)").click(function() {
+					$("#D1").find(".d1_2+div").css("background-color", "rgb(142, 126, 113)");
+				})
+				$("button:eq(3)").click(function() {
+					$("#d2_1").siblings().css({
+						"background":"rgba(55, 64, 79,0.6)",
+						"font-size":"26px"						
+					});
+				})
+				$("button:eq(4)").click(function() {
+					$("#D2").next().css("background", "rgba(252, 115, 13,0.8)");
+				})
+				$("button:eq(5)").click(function() {
+					$("#D2").nextAll().css("background", "rgba(0, 174, 255,0.8)");
+				})
+				$("button:eq(6)").click(function() {
+					$("#d3_1").nextUntil().css("background", "rgba(176, 156, 3,0.8)");
+				})
+				$("button:eq(7)").click(function() {
+					$("#d3_1").nextUntil("#d3_3").css("opacity", "0.3");
+				})
+				$("button:eq(8)").click(function() {
+					$("#d4_3").prev().css("background", "orange");
+				})
+				$("button:eq(9)").click(function() {
+					$("#d4_3").prevAll().css("background", "green");
+				})
+				$("button:eq(10)").click(function() {
+					$("fieldset").parent().css("background-color", "rgb(188, 214, 141)");
+				})				
+				$("button:eq(11)").click(function() {
+					$("#d5_1").parents().css("border", "1px solid orange");
+				})
+			})
+		</script>
+	</body>
+</html>

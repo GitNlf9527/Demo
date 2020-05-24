@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Part One 基本数据类型</title>
+	</head>
+
+	<body style="background: rgba(188, 214, 141,0.8);">
+		<p id="out"></p>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var out = $("#out");
+				var str1 = "A".concat("BC");
+				var str2 = "红炉透炭炙寒风，炭炙寒风御隆冬。冬隆御风寒炙炭，风寒炙炭透炉红。";
+				var str2_1 = str2.indexOf("寒"),
+					str2_2 = str2.lastIndexOf("寒");
+				var str3 = "tel：911".match(/\d/g);
+				var str4 = "abcde".replace(/a/, "A");
+				var str5 = "绝情谷".substring(1, 3);
+				var str6 = "0123456789".slice(0, 2);
+				var str7 = 3.1415926.toFixed(3);
+				var num1 = 0.1 + 0.7,
+					num2 = (0.1 * 10 + 0.7 * 10) / 10;
+				var str9 = new RegExp("c").test("abcdefg");
+				var num3 = 5e3,
+					num4 = -5e3,
+					num5 = 5e-3;
+				var num6 = parseInt("3.1415926");
+				var num7 = parseFloat("3.1415926");
+				var str12_1 = Boolean("123"),
+					str12_2 = Boolean("");
+				var num8 = Number(false),
+					num9 = Number(true);
+				var num10 = String(null);
+				var str11_1 = "123" == 123,
+					str11_2 = "123" === 123;
+				var person = new Object();
+				var str17_1 = window.innerHeight,
+					str17_2 = window.innerWidth;
+				var str18_1 = screen.availHeight,
+					str18_2 = screen.availWidth;
+				var str19 = "ABCabc".toUpperCase();
+				var str20 = "ABCabc".toLowerCase();
+				var str21 = new RegExp("c").test("abcdef");
+				person.id = 1;
+				person.name = "SF";
+				person.sex = "male";
+				out.text("1. 连接字符串 : concat ————————" + str1);
+				out.append("<br/>2. 匹配第一个字符下标和最后一个字符的下标 ： indexOf、lastIndexOf ————————" + str2_1 + "   " + str2_2);
+				out.append("<br/>3. 匹配正则表达式 : match ————————" + str3);
+				out.append("<br/>4. 替换字符串 : replace ————————" + str4);
+				out.append("<br/>5. 复制子字符串 : substring ————————" + str5);
+				out.append("<br/>6. 分割字符串 : slice ————————" + str6);
+				out.append("<br/>7. 保留小数点位数 : toFixed ————————" + str7);
+				out.append("<br/>8. 修正浮点数计算错误 ————————" + num1 + "  " + num2);
+				out.append("<br/>9. 正则表达式匹配 : test ————————" + str9);
+				out.append("<br/>10. 科学计数法  ————————" + num3 + " " + num4 + " " + num5);
+				out.append("<br/>11. 字符串转换Int,Float  ————————" + num6 + " " + num7);
+				out.append("<br/>12. Boolean类型  ————————" + str12_1 + " " + str12_2);
+				out.append("<br/>13. Number类型  ————————" + num8 + " " + num9);
+				out.append("<br/>14. String类型  ————————" + num10);
+				out.append("<br/>15. ==比较值，忽略值类型；===比较值和类型  ————————" + str11_1 + " " + str11_2);
+				out.append("<br/>16. for...in..循环 ————————");
+				for(i in person)
+					out.append(person[i] + "  ");
+				out.append("<br/>17. 浏览器可用高宽 ————————" + str17_1 + " " + str17_2);
+				out.append("<br/>18. 屏幕可用高宽(不含任务栏) ————————" + str18_1 + " " + str18_2);
+				out.append("<br/>19. 转换为大写字母 : toUpperCase() ————————" + str19);
+				out.append("<br/>20. 转换为小写字母 : toLowerCase() ————————" + str20);
+				out.append("<br/>21. 判断是否包含此字符 : test ————————" + str21);
+			})
+		</script>
+	</body>
+
+</html>

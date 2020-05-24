@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			body{
+				background: rgba(188, 214, 141,0.8);
+			}
+			div {
+				width: 140px;
+				height: 30px;
+				border: 1px solid slateblue;
+				background: skyblue;
+			}
+			
+			#accept,
+			#accept2 {
+				width: 140px;
+				height: 100px;
+				border: 1px solid saddlebrown;
+			}
+		</style>
+		<title></title>
+	</head>
+
+	<body>
+		<div id="d1" draggable="true" ondragstart="drag1(event)">附带数据拖拽</div>
+		<div id="d2" draggable="true" ondragstart="drag2(event)">移动拖拽</div>
+		<div id="d3" draggable="true" ondragstart="drag3(event)">复制拖拽</div>
+		<div id="d4" draggable="true" ondragstart="drag4(event)">链接拖拽</div>
+		<p id="accept" ondragover="allowDrag(event)" ondrop="drop1(event)"></p>
+		<p id="accept2" ondragover="allowDrag(event)" ondrop="drop2(event)"></p>
+		<p id="out"></p>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			function drag1(ev) {
+				ev.dataTransfer.setData("text/plain", ev.target.id);
+				ev.dataTransfer.setData("text/uri-list", "http://www.baidu.com");
+				ev.dataTransfer.setData("text/html", "<strong>too big</strong>");
+			}
+
+			function drag2(ev) {
+				ev.dataTransfer.setData("text/plain", "move");
+				ev.dataTransfer.effectAllowed = "move";
+			}
+
+			function drag3(ev) {
+				ev.dataTransfer.setData("text/plain", "copy");
+				ev.dataTransfer.effectAllowed = "copy";
+			}
+
+			function drag4(ev) {
+				ev.dataTransfer.setData("text/plain", "link");
+				ev.dataTransfer.effectAllowed = "link";
+			}
+
+			function allowDrag(ev) {
+				ev.preventDefault();
+			}
+
+			function drop1(ev) {
+				ev.preventDefault();
+				var plain = ev.dataTransfer.getData("text/plain");
+				var uriList = ev.dataTransfer.getData("text/uri-list");
+				var html = ev.dataTransfer.getData("text/html");
+				$("#out").html("接收到数据:<br/>" + plain + "<br/>" + uriList + "<br/>" + html);
+				ev.target.appendChild(document.getElementById(plain));
+			}
+
+			function drop2(ev) {
+				ev.preventDefault();
+				$("#out").html("");
+				var files = ev.dataTransfer.files;
+				for(var i = 0, f; i < files.length; i++) {
+					f = files[i];
+					var lastModifyTime = f.lastModifiedDate.toLocaleString();
+					$("#out").append("接收到数据：<br/>文件名: " + f.name + "<br/>接收类型: " + f.type + "<br/>大小: " + f.size + "字节<br/>文件最后修改时间: " + lastModifyTime + "<br/>");
+				}
+			}
+		</script>
+	</body>
+
+</html>

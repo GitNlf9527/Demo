@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Part Six 地理定位API</title>
+	</head>
+
+	<body style="background: rgba(188, 214, 141,0.8);">
+		<button id="btn_getPosition">开始实时获取位置</button>
+		<button id="btn_stopPosition">停止实时获取位置</button><br />
+		<span id="out"></span>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			var out = $("#out");
+			var options = {
+				enableHighAccuracy: true,
+				timeout: 10000,
+				maximunAge: 20000
+			};
+			var watchID;
+
+			if(navigator.geolocation)
+				out.text("支持地理定位");
+			else
+				out.text("<br/>不支持地理定位");
+			out.append("<br>开始获取地理定位信息...");
+			navigator.geolocation.getCurrentPosition(showPosition, showErrorMess, options);
+
+			$(document).ready(function() {
+				$("#btn_getPosition").click(function() {
+					out.append("<br>开始实时获取地理定位...");
+					watchID = navigator.geolocation.watchPosition(realTimePosition, showErrorMess, options);
+				})
+				$("#btn_stopPosition").click(function() {
+					out.append("<br>停止获取地理定位");
+					navigator.geolocation.clearWatch(watchID);
+				})
+			})
+
+			function showPosition(position) {
+				out.append("<br>经度：" + position.coords.latitude);
+				out.append("<br>纬度：" + position.coords.longitude);
+				out.append("<br>位置精确度：" + position.coords.accuracy);
+				out.append("<br>海拔：" + position.coords.altitude);
+				out.append("<br>海拔精确度：" + position.coords.altitudeAccuracy);
+				out.append("<br>方向：" + position.coords.heading + "°");
+				out.append("<br>速度：" + position.coords.speed + " m/s");
+			}
+
+			function realTimePosition(position) {
+				var d = new Date();
+				out.append("<br>更新时间 : " + d.toLocaleString() + "<br>经度：" + position.coords.latitude + "<br>纬度：" + position.coords.longitude);
+			}
+
+			function showErrorMess(error) {
+				switch(error) {
+					case error.PERMISSION_DENIED:
+						out.append("<br>用户拒绝获取地理位置的请求");
+						break;
+					case error.POSITION_UNAVAILABLE:
+						out.append("<br>位置信息不可用");
+						break;
+					case error.TIMEOUT:
+						out.append("<br>请求超时");
+						break;
+					case error.UNKNOWN_ERROR:
+						out.append("<br>未知错误");
+						break;
+				}
+			}
+		</script>
+	</body>
+
+</html>

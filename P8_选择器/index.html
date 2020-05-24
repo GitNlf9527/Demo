@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+			
+			.c1 {
+				background: sandybrown;
+				border: 1px solid saddlebrown;
+			}
+		</style>
+		<title>Part Eight DOM</title>
+	</head>
+
+	<body>
+		<p id="p1_1">P标签</p>
+		<p id="p1_2">P标签</p>
+		<button id="btn1">，选择器</button><br />
+		<hr />
+		<a href="https://www.baidu.com">https://www.baidu.com</a><br />
+		<a href="http://www.gov.cn">http://www.gov.cn</a><br />
+		<button id="btn2">[ ]选择器</button>
+		<hr />
+		<p id="p3">P标签&nbsp;
+			<span>span标签&nbsp;
+				<strong>strong标签</strong>
+				&nbsp;/span标签</span> &nbsp;/P标签
+		</p>
+		<button id="btn3">>选择器(子元素)</button>
+		<hr />
+		<p id="p4">P标签&nbsp;
+			<span>span标签&nbsp;
+				<strong>strong标签</strong>
+				&nbsp;/span标签</span> &nbsp;/P标签
+		</p>
+		<button id="btn4">空格选择器(后代)</button>
+		<hr />
+		<p id="p5_1">P标签(以我为标准)</p>
+		<p id="p5_2">P标签</p>
+		<p id="p5_3">P标签</p>
+		<button id="btn5">+选择器(后兄弟)</button>
+		<button id="btn6">~选择器(兄弟)</button>
+		<hr />
+		<h4>h4标签</h4>
+		<h4>h4标签</h4>
+		<h4>h4标签</h4>
+		<h4>h4标签</h4>
+		<button id="btn7_1">:first选择器</button>
+		<button id="btn7_2">:odd选择器(奇数)</button>
+		<button id="btn7_3">:even选择器(偶数)</button>
+		<button id="btn7_4">:eq选择器(任意序号)</button>
+		<hr />
+		<p class="c8">P标签abc</p>
+		<p class="c8">P标签def</p>
+		<button id="btn8">.contains()选择器(文本包含)</button>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#btn1").click(function() {
+					$("#p1_1,#p1_2").addClass("c1");
+				})
+				$("#btn2").click(function() {
+					$("a[href$='.cn']").css("background", "#F4A460");
+				})
+				$("#btn3").click(function() {
+					$("#p3>span").css("background", "#F4A460");
+				})
+				$("#btn4").click(function() {
+					$("#p4 strong").css("background", "#F4A460");
+				})
+				$("#btn5").click(function() {
+					$("#p5_1+p").css("background", "#F4A460");
+				})
+				$("#btn6").click(function() {
+					$("#p5_1~p").css("background", "#F4A460");
+				})
+				$("#btn7_1").click(function() {
+					$("h4:first").css("background", "#F4A460");
+				})
+				$("#btn7_2").click(function() {
+					$("h4:odd").css("background", "#F4A460");
+				})
+				$("#btn7_3").click(function() {
+					$("h4:even").css("background", "#F4A460");
+				})
+				$("#btn7_4").click(function() {
+					$("h4:eq(3)").css("background", "#F4A460");
+				})
+				$("#btn8").click(function() {
+					$(".c8:contains('a')").css("background", "#F4A460");
+				})
+			})
+		</script>
+	</body>
+
+</html>

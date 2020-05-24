@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+			
+			textarea {
+				width: 500px;
+				height: 100px;
+				background: rgba(188, 214, 141, 0.9);
+			}
+			
+			input {
+				background: rgba(188, 214, 141, 0.9);
+			}
+		</style>
+		<title>Part Thirteen AJAX </title>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend>jQuery AJAX</legend>
+			<textarea></textarea><br />
+			<button id="btn_load">.load</button>
+			<button id="btn_load2">.load(selector)</button>
+			<button id="btn_load3">.load(callback())</button>
+			<hr /> Username:
+			<input type="text" id="username" /> Password:
+			<input type="password" id="password" /><br />
+			<button id="btn_get">$.get</button>
+			<button id="btn_post">$.post</button>
+			<button id="btn_ajax">$.ajax</button>			
+			<hr />
+			<form>
+				Username:<input type="text" name="username"/>
+				Password:<input type="password" name="password" />
+			</form>
+			<button id="btn_param">$.param</button>
+			<button id="btn_serialize">$.serialize</button>
+			<button id="btn_serializeArray">$.serializeArray</button>
+
+		</fieldset>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#btn_load").click(function() {
+					$("textarea").load("txt.txt");
+				})
+				$("#btn_load2").click(function() {
+					$("body").load("txt.txt strong");
+				})
+				$("#btn_load3").click(function() {
+					$("textarea").load("txt.txt", function(response, status, xhr) {
+						if(status == "success") {
+							alert("xhr.status : " + xhr.status + "  xhr.statusText : " + xhr.statusText);
+						}
+					});
+				})
+				$("#btn_get").click(function() {
+					$.get("ajax1.jsp", {
+						username: $("#username").val(),
+						password: $("#password").val()
+					}, function(data) {
+						$("textarea").html(data);
+						alert("data : " + data);
+					})
+				})
+				$("#btn_post").click(function() {
+					$.post("ajax2.jsp", {
+						username: $("#username").val(),
+						password: $("#password").val()
+					}, function(data) {
+						$("textarea").html(data);
+						alert("data : " + data);
+					})
+				})
+				$("#btn_ajax").click(function() {
+					$.ajax({
+						url: "ajax2.jsp",
+						method: "post",
+						data: {
+							username: $("#username").val(),
+							password: $("#password").val()
+						},
+						dataType: "html",
+						beforeSend: function() {
+							alert("ready send request");
+						},
+						success: function(data) {
+							alert("request success");
+							$("textarea").html(data);
+							alert("data : " + data);
+						},
+						error: function(data) {
+							alert("request error");
+							$("textarea").html(data);
+							alert("data : " + data);
+						}
+					})
+				})
+				$("#btn_param").click(function() {
+					var p = new Object();
+					p.username = "zlm";
+					p.password = "9527";
+					var data = $.param(p);
+					alert("data : "+data);
+				})
+				$("#btn_serialize").click(function(){
+					alert($("form").serialize());
+				})
+				$("#btn_serializeArray").click(function(){
+					alert(JSON.stringify($("form").serializeArray()));
+				})
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+		<style>
+			div {
+				width: 80px;
+				height: 80px;
+				margin: 10px;
+			}
+		</style>
+		<title></title>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend>jQuery Event</legend>
+			按下次数：<span id="count"></span><br /> 按键状态：
+			<span id="statusKey"></span>
+			<div id="mouseEvent" style="text-align: center;border: 1px solid saddlebrown;line-height: 80px;-webkit-user-select: none;"></div>
+			状态:<span id="statusMouse"></span><br />
+			<form>
+				SNO:<input id="test" type="text" />
+				<select>
+					<option>male</option>
+					<option>female</option>
+				</select>
+				<input type="submit" value="Submit" />
+			</form>
+			状态:<span id="status3"></span><br />
+			<div>
+				<input id="bindBtn" type="button" value="未绑定" />
+				<input id="bind" type="button" value="绑定" />
+				<input id="unbind" type="button" value="解绑" />
+			</div>
+			<input id="temporary" type="button" value="临时事件" /><br />
+			<input id="str1" type="text" value="try to copy this string!" />
+		</fieldset>
+		<script>
+			var count = 0;
+			$(document).ready(function() {
+				$(document).keydown(function() {
+					$("#statusKey").text("down");
+					$("#count").text(count);
+				})
+				$(document).keyup(function() {
+					$("#statusKey").text("up");
+					$("#count").text(count++);
+				})
+				$("#mouseEvent").hover(function() {
+					$("#mouseEvent").css("box-shadow", "0px 0px 5px black");
+					$("#mouseEvent").css("background", "red");
+					$("#statusMouse").text("Hover");
+				})
+				$("#mouseEvent").click(function() {
+					$("#mouseEvent").css("background", "orange");
+					$("#statusMouse").text("Click");
+				})
+				$("#mouseEvent").dblclick(function() {
+					$("#mouseEvent").css("background", "yellow");
+					$("#statusMouse").text("Double Click");
+				})
+				$("#mouseEvent").mouseleave(function() {
+					$("#mouseEvent").css("box-shadow", "none");
+					$("#mouseEvent").css("background", "none");
+					$("#statusMouse").text("Leave");
+				})
+				$("#test").blur(function() {
+					$("#status3").text("blur");
+				})
+				$("#test").focus(function() {
+					$("#status3").text("focus");
+				})
+				$("#test").select(function() {
+					$("#status3").text("select");
+				})
+				$("select").change(function() {
+					$("#status3").text("change");
+				})
+				$("form").submit(function(e) {
+					var num = $("#test").val();
+					if(num == "" || isNaN(num)) {
+						$("#status3").text("this is not number!");
+						return false;
+					} else {
+						alert("Submit success!");
+						return true;
+					}
+				})
+				$("#bind").click(function() {
+					$("#bindBtn").val("已绑定");
+					$("#bindBtn").on("click", function() {
+						alert("bind success!");
+					})
+				})
+				$("#unbind").click(function() {
+					$("#bindBtn").val("未绑定");
+					$("#bindBtn").off("click")
+					alert("unbind success!");
+				})
+				$("#temporary").one("click", function() {
+					alert("once");
+				})
+				document.body.onselect=function(){
+					alert("selected string!");
+				}
+				document.body.oncopy=function(){
+					alert("NO Copy!");
+					return false;
+				}
+				document.body.oncut=function(){
+					alert("NO Cut!");
+					return false;
+				}
+				document.oncontextmenu=function(){
+					alert("NO Menu!");
+					return false;
+				}
+				document.onpaste=function(){
+					alert("NO Paste!");
+					return false;
+				}
+			})
+		</script>
+	</body>
+</html>

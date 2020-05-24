@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<style>
+			body{
+				background: rgba(188, 214, 141, 0.8);
+			}
+			textarea{
+				background: rgba(188, 214, 141, 0.9);
+			}
+			.add {
+				width: 150px;
+				border: 1px solid saddlebrown;
+			}
+			
+			.style1 {
+				color: goldenrod;
+			}
+		</style>
+		<title></title>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend>jQuery DOM</legend>
+			<p id="p1" style="width: 100px;height:23px;">
+				<span>span <i>1</i></span>
+				<span>span <strong>2</strong></span>
+			</p>
+			<button>.text()</button>
+			<button>.text("")</button>
+			<hr />
+			<textarea rows="2" cols="22">please enter content...</textarea><br />
+			<button>.val()</button>
+			<button>.val(string)</button>
+			<hr />
+			<p id="p2">
+				<span id="d" class="c">span 1</span>
+				<span id="dd" class="cc">span 2</span>
+			</p>
+			<button>.html()</button>
+			<button>.html(html)</button>
+			<hr />
+			<a href="https://www.mosoteach.cn">Blue ink cloud</a><br/>
+			<button>.attr(attribute)</button>
+			<hr />
+			<p id="add" class="add">Current paragraph</p>
+			<button>append</button>
+			<button>prepend</button>
+			<button>after</button>
+			<button>before</button>
+			<button>remove outside</button>
+			<button>empty</button>
+			<button>remove attribute</button>
+			<hr />
+			<p id="add2">test</p>
+			<button>add class</button>
+			<button>remove class</button>
+			<button>toggle class</button>
+		</fieldset>
+		<script>
+			$(document).ready(function() {
+				$("button:eq(0)").click(function() {
+					alert($("#p1").text());
+				})
+				$("button:eq(1)").click(function() {
+					$("#p1").text("");
+				})
+				$("button:eq(2)").click(function() {
+					alert($("textarea").val());
+				})
+				$("button:eq(3)").click(function() {
+					$("textarea").val("海纳百川，有容乃大。\n壁立千仞，无欲则刚。")
+					$("textarea").css("color", "black");
+					$("textarea").css("text-align", "center");
+				})
+				$("button:eq(4)").click(function() {
+					alert($("#p2").html());
+				})
+				$("button:eq(5)").click(function() {
+					$("#p2").html("<strong>set success!</strong>");
+				})
+				$("button:eq(6)").click(function() {
+					alert($("a").attr("href"));
+				})
+				$("button:eq(7)").click(function() {
+					$("#add").append("<p>Next paragraph</p>")
+				})
+				$("button:eq(8)").click(function() {
+					$("#add").prepend("<p>Previous paragraph</p>")
+				})
+				$("button:eq(9)").click(function() {
+					$("#add").after("<p id='outside'>After paragraph</p>");
+				})
+				$("button:eq(10)").click(function() {
+					$("#add").before("<p id='outside'>Before paragraph</p>");
+				})
+				$("button:eq(11)").click(function() {
+					$("#outside").remove();
+				})
+				$("button:eq(12)").click(function() {
+					$("#add").empty();
+				})
+				$("button:eq(13)").click(function() {
+					$("#add").removeAttr("class");
+				})
+				$("button:eq(14)").click(function() {
+					$("#add2").addClass("add style1");
+				})
+				$("button:eq(15)").click(function() {
+					$("#add2").removeClass("style1");
+				})
+				$("button:eq(16)").click(function() {
+					$("#add2").toggleClass("add style1");
+				})
+			})
+		</script>
+	</body>
+</html>

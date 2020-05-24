@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+						
+			
+			input {
+				background: rgba(188, 214, 141, 0.6);
+			}
+			
+			button {
+				background: rgba(188, 214, 141, 0.1);
+				border-radius: 10%;
+			}
+			
+			#container{
+				margin-left: 30%;
+				margin-top: 15%;
+			}
+		</style>
+		<link rel="stylesheet" href="css/popup.css" />
+		<link rel="stylesheet" href="src/css/dialog.css" />
+	</head>
+
+	<body>
+		<div id="container">
+			<label>Name：<input type="text" id="name"></label>&nbsp;<button id="addData">Add Data</button><br /> <label>Age：&nbsp;&nbsp;&nbsp;<input type="number" id="age" min=1></label>
+			<button id="getData">Get Data</button><br /> Sex： &nbsp;
+			<label><input type="radio" id="male" name="sex" value="male" checked>Male</label>
+			<label><input type="radio" id="female" name="sex" value="female">Female</label><br />
+			<button id="openDB">Open Database</button>
+			<button id="deleteDB">Delete Database</button>
+			<p id="display"></p>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="src/js/jquery.dialog.js"></script>
+		<script>
+			$(document).ready(function() {
+				var db;
+				var dbName = "test";
+				var request;
+				var objectStore;
+				$("#openDB").click(function() {
+					request = indexedDB.open(dbName, 1);
+					request.onerror = function() {
+						operate_Fail("Open Database Fail:" + event.target.message);
+					}
+					request.onsuccess = function(event) {
+						db = event.target.result;
+						var transaction = db.transaction(["table"], "readwrite");
+						objectStore = transaction.objectStore("table");
+						operate_Success("Open Database Success!");
+					}
+					request.onupgradeneeded = function(event) {
+						db = event.target.result;
+						objectStore = db.createObjectStore("table", {
+							keyPath: "id",
+							autoIncrement: true
+						});
+					}
+				})
+				$("#deleteDB").click(function() {
+					db.close();
+					try {
+						request = indexedDB.deleteDatabase(dbName);
+						request.onerror = function() {
+							operate_Fail("Delete Database Fail:" + event.target.message);
+						}
+						request.onsuccess = function(event) {
+							operate_Success("Delete Database Success!");
+						}
+					} catch(e) {
+						operate_Fail(" "+e.getMessage);
+					}
+				})
+				$("#addData").click(function() {
+					var sex;
+					var name = $("#name").val();
+					var age = $("#age").val();
+					var flag = $("#male").val();
+					if(flag)
+						sex = "male";
+					else
+						sex = "female";
+					var detail = {
+						name: name,
+						age: age,
+						sex: sex
+					}
+					if(!db) {
+						operate_Warning("Please Open Database！");
+						return false;
+					}
+					var transaction = db.transaction(["table"], "readwrite");
+					objectStore = transaction.objectStore("table");
+					objectStore.add(detail);
+					operate_Success("Add Success！");
+				})
+				$("#getData").click(function() {
+					$("#display").html(" ");
+					if(!db) {
+						operate_Warning("Please Open Database！");
+						return false;
+					}
+					var store = db.transaction("table").objectStore("table");
+					var keyRange = IDBKeyRange.lowerBound(0);
+					var cursorRequest = store.openCursor(keyRange);
+					cursorRequest.onsuccess = function(e) {
+						var result = e.target.result;
+						if(result == false)
+							return;
+						print(result.value);
+						result.continue();
+					};
+					cursorRequest.onerror = function(e) {
+						operate_Warning("Search Fail！");
+					};
+				})
+
+				function print(e) {
+					$("#display").append("Name:" + e.name + " Age:" + e.age + " Sex:" + e.sex + "<br />");
+				}
+
+				function operate_Success(str) {
+					$.sendSuccessToTop(str, 3000);
+				}
+
+				function operate_Warning(str) {
+					$.sendWarningToTop(str, 3000);
+				}
+
+				function operate_Fail(str) {
+					$.sendError(str, 3000);
+				}
+			})
+		</script>
+	</body>
+
+</html>

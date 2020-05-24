@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<title></title>
+		<style>
+			body{
+				background: rgba(188, 214, 141,0.8);
+			}
+			@keyframes myFrame {
+				0% {
+					transform: translate(0px);
+				}
+				30% {
+					transform: translate(400px);
+					border-radius: 0% 50% 0% 0%;
+				}
+				40% {
+					transform: translate(400px, 30px);
+					border-radius: 0% 50% 50% 0%;
+				}
+				50% {
+					transform: translate(350px, 0px);
+					border-radius: 0% 50% 50% 50%;
+				}
+				60% {
+					transform: translate(350px, 0px);
+					border-radius: 50% 50% 50% 50%;
+				}
+				100% {
+					border-radius: 50%;
+					background: salmon;
+				}
+			}
+			
+			div {
+				width: 50px;
+				height: 50px;
+				background: sandybrown;
+				margin: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<fieldset>
+			<legend><strong>jQuery动画</strong></legend>
+			<div id="d1"></div>
+			<button id="hideBtn">Hide</button>
+			<button id="showBtn">Show</button>
+			<button id="toggleBtn">Hide/Show</button>
+			<hr />
+			<div id="d2"></div>
+			<button id="fadeOut">Fade Out</button>
+			<button id="fadeIn">Fade In</button>
+			<button id="fadeToggle">Fade Toggle</button>
+			<button id="fadeTo">Transparency</button>
+			<button id="fadeTo2">Restore</button>
+			<hr />
+			<div id="d3"></div>
+			<button id="slideUp">Slide Up</button>
+			<button id="slideDown">Slide Down</button>
+			<button id="slideUpDown">Slide UP/Down</button>
+			<hr />
+			<div id="d4" style="position: relative;"></div>
+			<button id="animate">Animate Queue</button>
+			<button id="stop1">Stop Current</button>
+			<button id="stop2">Stop All</button>
+			<hr />
+			<div id="d5"></div>
+			<button id="animateChaining">Animate Chaining</button>
+		</fieldset>
+
+		<script>
+			$(document).ready(function() {
+				$("#hideBtn").click(function() {
+					$("#d1").hide(1500, function() {
+						$("#hideBtn").hide(1000);
+					})
+				})
+				$("#showBtn").click(function() {
+					$("#d1").show(1500, function() {
+						$("#hideBtn").show(1000);
+					})
+				})
+				$("#toggleBtn").click(function() {
+					$("#d1").toggle(1500, function() {
+						$("#hideBtn").toggle(1000, function() {
+							$("#showBtn").toggle(1000);
+						});
+					});
+				})
+				$("#fadeOut").click(function() {
+					$("#d2").fadeOut(2000);
+					$(this).fadeOut(2000);
+				})
+				$("#fadeIn").click(function() {
+					$("#d2").fadeIn(2000);
+					$("#fadeOut").fadeIn(2000);
+				})
+				$("#fadeToggle").click(function() {
+					$("#d2").fadeToggle(2000);
+					$("#fadeOut").fadeToggle(2000);
+					$("#fadeIn").fadeToggle(2000);
+				})
+				$("#fadeTo").click(function() {
+					$("#d2").fadeTo(2000, 0.2);
+				})
+				$("#fadeTo2").click(function() {
+					$("#d2").fadeTo(2000, 1);
+				})
+				$("#slideDown").click(function() {
+					$("#d3").slideDown(2000);
+				})
+				$("#slideUp").click(function() {
+					$("#d3").slideUp(2000);
+				})
+				$("#slideUpDown").click(function() {
+					$("#d3").slideToggle(2000);
+				})
+				$("#animate").click(function() {
+					$("#d4").animate({
+						opacity: 0.5,
+						left: "+=400px"
+					}, 2000);
+					$("#d4").animate({
+						top: "+=35px"
+					}, 500);
+					$("#d4").animate({
+						left: "+=400px"
+					}, 500);
+					$("#d4").animate({
+						left: "-=800px",
+						top: "-=35px",
+						opacity: 1,
+						fontSize: "16px"
+					}, 500)
+				})
+				$("#animateChaining").click(function() {
+					$("#d5").slideUp(500)
+						.slideDown(500)
+						.css("animation", "myFrame 3s 1s forwards")
+				})
+				$("#stop1").click(function() {
+					$("#d4").stop();
+				})
+				$("#stop2").click(function() {
+					$("#d4").stop(true, false);
+				})
+			})
+		</script>
+	</body>
+</html>

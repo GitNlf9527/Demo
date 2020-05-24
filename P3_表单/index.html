@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+		<form id="myForm" action="http://www.baidu.com" method="get" oninput="output2.innerHTML=range2.value" autocomplete="on" novalidate="novalidate" >
+			<fieldset>
+				<legend>Form API</legend>
+				<input type="image" src="img/i20.png" alt="nut" style="width: 80px;height: 80px;" />
+				<input type="image" src="img/i21.png" alt="nut" style="width: 80px;height: 80px;" />
+				<input type="image" src="img/i1.png" alt="nut" style="width: 80px;height: 80px;" />
+				<input type="image" src="img/i14.png" alt="nut" style="width: 80px;height: 80px;" /><br />
+				<label>username:<input type="text" name="username" list="myList" autofocus="autofocus" size="21" placeholder="Please enter your name" pattern="[A-z]+" required="required"/></label><br />
+				<datalist id="myList">
+					<option>test1</option>
+					<option>test2</option>
+					<option>test3</option>
+				</datalist>
+				<label>password:<input type="password" name="password" size="21" placeholder="Please enter password" required="required"/></label><br />
+				<label>age:<input type="number" min="0" max="100" step="20"/></label><br />
+				<label>male<input type="radio" name="sex" value="male" checked=""/></label>
+				<label>female<input type="radio" name="sex" value="female" /></label><br />
+				<label>invisible<input type="checkbox" name="superAbility" value="invisible" /></label>
+				<label>immortality<input type="checkbox" name="superAbility" value="immortality" /></label>
+				<label>flight<input type="checkbox" name="superAbility" value="flight" /></label><br />
+				<label>tel:<input type="tel" name="tel"/></label><br />
+				<label>email:<input type="email" name="email" /></label><br />
+				<label>postal code:<input type="text" pattern="[0-9]{6}" title="Please enter postal code!" /></label><br />				
+				<label>url:<input type="url" /></label><br /> power:
+				<input id="power" type="range" min="0" max="100" step="5" value="0" onchange="powerValue()" />&nbsp;<span id="powerValue">0</span><br />
+				mana:<input name="range2" type="range" min="0" max="100" value="0" step="1" />
+				<output name="output2" for="range2">0</output><br />
+				<label>start:<input type="week" /></label><br />
+				<label>date:<input type="date" /></label><br />
+				<label>time:<input type="time" /></label><br />
+				<label>search:<input type="search" /></label><br />
+				<label>color:<input type="color" /></label><br />
+				image type:<input type="file" accept="image/*" multiple="multiple"/><br /> 
+				text type:<input type="file" accept="text/*" /><br /> 
+				audio type:<input type="file" accept="audio/*" /><br />
+				<input type="hidden" name="hidden" value="hiddenValue" />
+				<textarea cols="8" rows="5" style="resize: none;">normal</textarea>
+				<textarea cols="8" rows="5" readonly="readonly" style="resize: none;">readOnly</textarea>
+				<textarea cols="8" rows="5" disabled="disabled" style="-webkit-user-select: none;" >disabled</textarea><br />  visible size: 2
+				<select size="2">
+					<option>red</option>
+					<option>orange</option>
+					<option>blue</option>
+					<option>purple</option>
+					<option>gray</option>
+					<option>black</option>
+					<option>white</option>
+				</select><br /> multiple
+				<select multiple="multiple">
+					<option>red</option>
+					<option>orange</option>
+					<option>blue</option>
+					<option>purple</option>
+					<option>gray</option>
+					<option>black</option>
+					<option>white</option>
+				</select><br />
+				<select>
+					<optgroup label="bright">
+						<option>red</option>
+						<option selected="selected">orange</option>
+						<option disabled="disabled">white</option>
+					</optgroup>
+					<optgroup label="dark" disabled="disabled">
+						<option>blue</option>
+						<option>purple</option>
+						<option>gray</option>
+						<option>black</option>
+					</optgroup>
+				</select><br />
+				<input type="reset" value="Reset" />
+				<input type="submit" value="Submit" formmethod="get" formaction="http://www.baidu.com" />
+				<input type="button" value="alert" onclick="alert('Everything normal!')" />
+			</fieldset>
+		</form>
+		addition:<input type="text" name="addition" form="myForm,myForm2" />
+		<form id="myForm2">
+			<input type="submit" />
+		</form>
+		<script>
+			function powerValue() {
+				var value = document.getElementById("power").value;
+				document.getElementById("powerValue").innerHTML = value;
+			}
+		</script>
+	</body>
+</html>
+

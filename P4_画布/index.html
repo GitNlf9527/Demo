@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			function drawP() {
+				var img = new Image();
+				var img2 = new Image();
+				var c = document.getElementById("myCanvas");
+				var c2 = document.getElementById("myCanvas2");
+				var c3 = document.getElementById("myCanvas3");
+				var c4 = document.getElementById("myCanvas4");
+				var c5 = document.getElementById("myCanvas5");
+				var c6 = document.getElementById("myCanvas6");
+				var c7 = document.getElementById("myCanvas7");
+				var c8 = document.getElementById("myCanvas8");
+				var c9 = document.getElementById("myCanvas9");
+				var c10 = document.getElementById("myCanvas10");
+				var c11 = document.getElementById("myCanvas11");
+				var ctx = c.getContext("2d");
+				var ctx2 = c2.getContext("2d");
+				var ctx3 = c3.getContext("2d");
+				var ctx4 = c4.getContext("2d");
+				var ctx5 = c5.getContext("2d");
+				var ctx6 = c6.getContext("2d");
+				var ctx7 = c7.getContext("2d");
+				var ctx8 = c8.getContext("2d");
+				var ctx9 = c9.getContext("2d");
+				var ctx10 = c10.getContext("2d");
+				var ctx11 = c11.getContext("2d");
+				ctx.moveTo(10, 10);
+				ctx.lineTo(200, 10);
+				ctx.lineTo(10, 200);
+				ctx.lineTo(200, 200);
+				ctx.moveTo(210, 10);
+				ctx.lineTo(210, 200);
+				ctx.lineTo(410, 200);
+				ctx.moveTo(420, 200);
+				ctx.lineTo(470, 10);
+				ctx.lineTo(520, 200);
+				ctx.lineTo(570, 10);
+				ctx.lineTo(620, 200);
+				ctx.stroke();
+				ctx2.beginPath();
+				ctx2.moveTo(10, 10);
+				ctx2.lineTo(10, 200);
+				ctx2.lineTo(210, 200);
+				ctx2.closePath();
+				ctx2.stroke();
+				ctx2.fillStyle = "cornflowerblue";
+				ctx2.fill();
+				drawStar(3, 210, 10, 50, ctx2);
+				drawStar(5, 250, 10, 50, ctx2);
+				drawStar(7, 300, 10, 50, ctx2);
+				drawStar(9, 370, 10, 50, ctx2);
+				ctx3.beginPath();
+				ctx3.moveTo(10, 10);
+				ctx3.bezierCurveTo(10, 10, 60, 360, 310, 710);
+				ctx3.bezierCurveTo(310, 710, 550, 360, 610, 10);
+				ctx3.stroke();
+				ctx3.beginPath();
+				ctx3.moveTo(80, 40);
+				ctx3.lineTo(240, 80);
+				ctx3.moveTo(540, 40);
+				ctx3.lineTo(380, 80);
+				ctx3.stroke();
+				ctx3.beginPath();
+				ctx3.moveTo(80, 100);
+				ctx3.lineTo(80, 160);
+				ctx3.lineTo(250, 160);
+				ctx3.closePath();
+				ctx3.stroke();
+				ctx3.beginPath();
+				ctx3.moveTo(540, 100);
+				ctx3.lineTo(540, 160);
+				ctx3.lineTo(370, 160);
+				ctx3.closePath();
+				ctx3.stroke();
+				ctx3.beginPath();
+				ctx3.moveTo(280, 470);
+				ctx3.lineTo(310, 400);
+				ctx3.lineTo(340, 470);
+				ctx3.stroke();
+				ctx3.beginPath();
+				ctx3.arc(250, 160, 100, -Math.PI, -Math.PI * 0.89, false);
+				ctx3.stroke();
+				ctx3.beginPath();
+				ctx3.arc(580, 160, 100, -Math.PI, -Math.PI * 0.86, false);
+				ctx3.stroke();
+				ctx4.strokeRect(10, 10, 100, 100);
+				ctx4.fillStyle = "lightgray";
+				ctx4.fillRect(210, 10, 100, 100);
+				ctx4.clearRect(230, 30, 60, 60);
+				img.src = "img/pattern.png";
+				img.onload = function() {
+					ctx5.drawImage(img, 0, 0, 80, 80);
+					ctx5.drawImage(img, 0, 0, 80, 80, 100, 10, 40, 40);
+				}
+				ctx5.font = "bold 30px 宋体";
+				ctx5.fillText("hello", 200, 30);
+				ctx5.strokeText("HELLO", 310, 30);
+				ctx5.beginPath();
+				ctx5.fillStyle = "rgba(250, 150, 83,0.2)";
+				ctx5.fillRect(10, 100, 100, 100);
+				ctx5.fillStyle = "rgba(250, 150, 83,0.4)";
+				ctx5.fillRect(120, 100, 100, 100);
+				ctx5.fillStyle = "rgba(250, 150, 83,0.8)";
+				ctx5.fillRect(230, 100, 100, 100);
+				var linear = ctx5.createLinearGradient(10, 210, 110, 310);
+				linear.addColorStop(0, "red");
+				linear.addColorStop(0.5, "orange");
+				linear.addColorStop(1, "purple");
+				ctx5.fillStyle = linear;
+				ctx5.fillRect(10, 210, 100, 100);
+				img2.src = "img/-1.png";
+				img2.onload = function() {
+					var pattern = ctx5.createPattern(img2, "no-repeat");
+					ctx5.fillStyle = pattern;
+					ctx5.fillRect(120, 210, 100, 100);
+				}
+				ctx6.lineWidth = "4";
+				ctx6.moveTo(100, 10);
+				ctx6.lineTo(50, 60);
+				ctx6.lineTo(150, 60);
+				ctx6.lineTo(100, 10);
+				ctx6.moveTo(100, 60);
+				ctx6.lineTo(25, 110);
+				ctx6.lineTo(175, 110);
+				ctx6.lineTo(100, 60);
+				ctx6.moveTo(100, 110);
+				ctx6.lineTo(0, 160);
+				ctx6.lineTo(200, 160);
+				ctx6.lineTo(100, 110);
+				ctx6.strokeStyle = "green";
+				ctx6.stroke();
+				ctx6.beginPath();
+				ctx6.lineCap = "square";
+				ctx6.moveTo(80, 160);
+				ctx6.lineTo(80, 280);
+				ctx6.lineTo(120, 280);
+				ctx6.lineTo(120, 160);
+				ctx6.strokeStyle = "brown";
+				ctx6.stroke();
+				ctx6.beginPath();
+				ctx6.shadowOffsetX = 8;
+				ctx6.shadowOffsetY = 8;
+				ctx6.shadowBlur = 4;
+				ctx6.shadowColor = "rgba(11, 6, 3,0.5)";
+				ctx6.fillRect(180, 280, 100, 100);
+				ctx7.strokeStyle = "red";
+				ctx7.lineWidth = "20";
+				ctx7.save();
+				ctx7.strokeStyle = "orange";
+				ctx7.lineWidth = "20";
+				ctx7.save();
+				ctx7.strokeStyle = "blue";
+				ctx7.lineWidth = "20";
+				ctx7.arc(200, 200, 120, 0, Math.PI * 2, true);
+				ctx7.stroke();
+				ctx7.restore();
+				ctx7.beginPath();
+				ctx7.arc(200, 200, 100, 0, Math.PI * 2, true);
+				ctx7.stroke();
+				ctx7.restore();
+				ctx7.beginPath();
+				ctx7.arc(200, 200, 80, 0, Math.PI * 2, true);
+				ctx7.stroke();
+				drawCircle(ctx8);
+				ctx8.translate(80, 0);
+				drawCircle(ctx8);
+				ctx8.translate(-160, 0);
+				drawCircle(ctx8);
+				ctx8.translate(40, 80);
+				drawCircle(ctx8);
+				ctx8.translate(80, 0);
+				drawCircle(ctx8);
+				ctx9.translate(200, 200);
+				drawRotate(ctx9);
+				ctx9.scale(0.2, 0.2);
+				drawRotate(ctx9);
+				ctx10.transform(1, -0.3, -0.3, 1, 50, 50);
+				ctx10.rect(150, 150, 100, 100);
+				ctx10.stroke();
+				ctx11.arc(200, 200, 200, 0, Math.PI * 2, true);
+				ctx11.clip()
+				ctx11.fillStyle = "rgb(246, 246, 246)";
+				ctx11.fillRect(0, 0, 400, 400);
+			}
+
+			function drawRotate(ctx) {
+				for(var i = 0; i < 9; i++) {
+					ctx.rotate(Math.PI * 2 / 9);
+					ctx.beginPath();
+					ctx.arc(100, 100, 50, 0, Math.PI * 2, true);
+					ctx.stroke();
+				}
+			}
+
+			function drawStar(n, x, y, r, ctx) {
+				ctx.beginPath();
+				for(var i = 0; i < n; i++) {
+					var radians = Math.PI / n * 4 * i;
+					var x = Math.sin(radians) * r + x;
+					var y = Math.cos(radians) * r + y;
+					ctx.lineTo(x, y);
+				}
+				var cr = parseInt(Math.random() * 255);
+				var cg = parseInt(Math.random() * 255);
+				var cb = parseInt(Math.random() * 255);
+				ctx.closePath();
+				ctx.shadowOffsetX = 0;
+				ctx.shadowOffsetY = 0;
+				ctx.shadowBlur = 5;
+				ctx.shadowColor = "rgb(" + cr + "," + cg + "," + cb + ")";
+				ctx.fill();
+			}
+
+			function drawCircle(ctx) {
+				ctx.beginPath();
+				ctx.arc(200, 150, 50, 0, Math.PI * 2, true);
+				ctx.stroke();
+			}
+		</script>
+	</head>
+
+	<body onload="drawP()">
+		<canvas id="myCanvas" width="640px" height="210px" style="border: 1px solid saddlebrown;">
+			这个浏览器不支持canvas
+		</canvas>
+		<canvas id="myCanvas2" width="640px" height="210px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas3" width="800px" height="800px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas4" width="400px" height="200px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas5" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas6" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas7" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas8" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas9" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas10" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<canvas id="myCanvas11" width="400px" height="400px" style="border: 1px solid saddlebrown;"></canvas>
+		<script>
+			setInterval(function() {
+				var c11 = document.getElementById("myCanvas11");
+				var ctx11 = c11.getContext("2d");
+				drawStar(5, Math.random() * 400, Math.random() * 400, 30, ctx11);
+			}, 200);
+		</script>
+	</body>
+
+</html>
+

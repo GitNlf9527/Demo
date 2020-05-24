@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+		</style>
+		<title>Part Five 音视频API</title>
+	</head>
+
+	<body>
+		<audio id="myAudio" controls muted="muted">
+			<source src="music/嘉年华（女儿版）.ogg" type="audio/ogg"></source>
+			<source src="music/嘉年华（女儿版）.mp3" type="audio/mp3"></source>
+		</audio><br/>
+		<button id="btn_Audio">Play</button><br />
+		<video id="myVideo" src="Video/行尸走肉第十季-15.mp4" type="video/mp4" width="200" height="200" controls="controls">
+		</video><br />
+		<button id="btn_Video">Play</button>
+		<button id="btn_Maximize">Maximize</button>
+		<button id="btn_Progress">Progress</button>
+		<button id="btn_Reverse">Reverse</button>
+		<button id="btn_Mess">Mess</button><br />
+		<span id="out"></span>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			var out=$("#out");
+			$(document).ready(function() {
+				out.text("浏览器是否支持Audio标签: " + !!document.createElement("audio").canPlayType);
+				out.append("<br/>浏览器是否支持Video标签: " + !!document.createElement("video").canPlayType);
+				$("#btn_Audio").click(function() {
+					if($(this).text() == "Play") {
+						myAudio.play();
+						$(this).text("Pause");
+					} else {
+						myAudio.pause();
+						$(this).text("Play");
+					}
+				})
+				$("#btn_Video").click(function() {
+					if($(this).text() == "Play") {
+						myVideo.play();
+						$(this).text("Pause");
+					} else {
+						myVideo.pause();
+						$(this).text("Play");
+					}
+				})
+				$("#btn_Maximize").click(function() {
+					myVideo.width = window.innerWidth - 50;
+					myVideo.height = window.innerHeight - 50;
+				})
+				$("#btn_Progress").click(function() {
+					myVideo.currentTime +=5; 
+				})
+				$("#btn_Reverse").click(function(){
+					myVideo.currentTime -=5;
+				})
+				$("#btn_Mess").click(function(){
+					out.append("<br/>视频时长："+myVideo.seekable.end(0));
+					out.append("<br/>视频进度："+myVideo.played.end(0));
+				})
+			})
+		</script>
+	</body>
+
+</html>
