@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			body {
+				background: rgba(188, 214, 141, 0.8);
+			}
+			
+			input {
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				z-index: 1;
+				opacity: 0;
+			}
+			
+			label {
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				top: 18px;
+				left: 12px;
+				border-radius: 50%;
+				z-index: -1;
+			}
+			
+			input[value="off"]:checked {
+				z-index: 0;
+			}
+			
+			input[value="on"]:checked~input[value="off"] {
+				z-index: 1;
+			}
+			
+			input[value="off"]:checked~label {
+				background: rgba(255, 255, 255, 0.03);
+				box-shadow: inset 0px 1px 5px rgba(255, 255, 255, 0.1), inset 0px 2px 20px rgba(255, 255, 255, 0.1), 0px 20px 15px -5px rgba(0, 0, 0, 0.1);
+			}
+			
+			input[value="on"]:checked~label {
+				background: rgba(255, 255, 255, 1);
+				box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8), 0px 0px 30px rgba(255, 255, 255, 0.8), 0px 0px 50px rgba(255, 255, 255, 0.6), 0px 0px 70px rgba(255, 255, 255, 0.6), 0px 0px 120px rgba(255, 255, 255, 1);
+			}
+			
+			.tips {
+				position: absolute;
+				top: 350px;
+				left: 1px;
+				width: 288px;
+				height: 40px;
+				color: rgba(79, 79, 80, 0.4);
+				border: 1px solid rgba(80, 81, 81,0.5);
+			}
+		</style>
+		<title></title>
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<fieldset class="tips">
+			<legend>二进制时间解锁</legend>
+			一、二行是小时位 ， 三、四行是分钟位
+		</fieldset>
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			var n1 = 0,
+				n2 = 0,
+				n3 = 0,
+				n4 = 0,
+				row = 1;
+
+			$(document).ready(function() {
+				alert(new Date());
+				addElements();
+				compute();
+				check();
+			})
+
+			function addElements() {
+				var top = 20,
+					left = 0;
+				paint(top, left);
+				top += 50;
+				left = 0;
+				row++;
+				paint(top, left);
+				top += 50;
+				left = 0;
+				row++;
+				paint(top, left);
+				top += 50;
+				left = 0;
+				row++;
+				paint(top, left);
+			}
+
+			function paint(top, left) {
+				for(var i = 8; i >= 1; i /= 2) {
+					left += 50;
+					$("#container").append("<p id='p" + row + "_" + i + "'><input type='radio' class='+" + i + "' name='num" + row + "_" + i + "' value='on' style='left:" + left + "px;top:" + top + "px'/><input type='radio' class='-" + i + "' name='num" + row + "_" + i + "' value='off' checked style='left:" + left + "px;top:" + top + "px'/><label for='num" + row + "_" + i + "'style='left:" + left + "px;top:" + top + "px'></label></p>");
+				}
+
+			}
+
+			function compute() {
+				for(var i = 8; i >= 1; i /= 2) {
+					$("#p1_" + i + " input:eq(0),#p1_" + i + " input:eq(1)").click(function() {
+						n1 += parseInt(this.className);
+						check();
+					})
+				}
+				for(var i = 8; i >= 1; i /= 2) {
+					$("#p2_" + i + " input:eq(0),#p2_" + i + " input:eq(1)").click(function() {
+						n2 += parseInt(this.className);
+						check();
+					})
+				}
+				for(var i = 8; i >= 1; i /= 2) {
+					$("#p3_" + i + " input:eq(0),#p3_" + i + " input:eq(1)").click(function() {
+						n3 += parseInt(this.className);
+						check();
+					})
+				}
+				for(var i = 8; i >= 1; i /= 2) {
+					$("#p4_" + i + " input:eq(0),#p4_" + i + " input:eq(1)").click(function() {
+						n4 += parseInt(this.className);
+						check();
+					})
+				}
+			}
+
+			function check() {
+				var hours = new Date().getHours();
+				var minutes = new Date().getMinutes();
+				var b1 = 0,
+					b3 = 0;
+				var b2 = hours % 10,
+					b4 = minutes % 10;
+				if(hours > 10)
+					b1 = parseInt(hours / 10);
+				if(minutes > 10)
+					b3 = parseInt(minutes / 10);
+				if(b1 == n1 && b2 == n2 && b3 == n3 && b4 == n4)
+					alert("Congratulations! OPEN!!!")
+			}
+		</script>
+	</body>
+</html>

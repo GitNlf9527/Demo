@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<style>
+			@keyframes myFrame {
+				0% {
+					box-shadow: 0px 0px 10px darkred;
+				}
+				10% {
+					box-shadow: 0px 0px 10px red;
+				}
+				20% {
+					box-shadow: 0px 0px 10px orange;
+				}
+				30% {
+					box-shadow: 0px 0px 10px yellow;
+				}
+				40% {
+					box-shadow: 0px 0px 10px greenyellow;
+				}
+				50% {
+					box-shadow: 0px 0px 10px cadetblue;
+				}
+				60% {
+					box-shadow: 0px 0px 10px cornflowerblue;
+				}
+				70% {
+					box-shadow: 0px 0px 10px mediumpurple;
+				}
+				80% {
+					box-shadow: 0px 0px 10px palevioletred;
+				}
+				90% {
+					box-shadow: 0px 0px 10px darkred;
+				}
+				100% {
+					box-shadow: 0px 0px 10px darkred;
+				}
+			}
+			
+			div {
+				width: 100px;
+				height: 100px;
+				position: absolute;
+			}
+			
+			.d1 {
+				left: 20px;
+				top: 20px;
+				background: darkseagreen;
+				z-index: 1;
+			}
+			
+			.d2 {
+				left: 200px;
+				top: 400px;
+				border-radius: 50%;
+				background: antiquewhite;
+				z-index: 0;
+			}
+			
+			.pp {
+				animation: myFrame 4s infinite;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="d1" class="d1"></div>
+		<div id="d2" class="d2"></div>
+		<script>
+			var d1 = document.getElementById("d1");
+			var d2 = document.getElementById("d2");
+			//圆心
+			var centerDot = new Object();
+			centerDot.x = d2.offsetLeft + d2.offsetWidth / 2;
+			centerDot.y = d2.offsetTop + d2.offsetHeight / 2;
+			d1.onmousedown = function(e) {
+				e = e || event;
+				/*鼠标在矩形内的偏移量*/
+				var posX, posY;
+				posX = e.clientX - this.offsetLeft;
+				posY = e.clientY - this.offsetTop;
+				d1.onmousemove = function(e) {
+					/*矩形四个顶点*/
+					var dot1 = new Object(),
+						dot2 = new Object(),
+						dot3 = new Object(),
+						dot4 = new Object();
+					var left = e.clientX - posX,
+						top = e.clientY - posY;
+					var d1Left = d1.offsetLeft;
+					var d1Top = d1.offsetTop;
+					var d1Right = d1Left + d1.offsetWidth;
+					var d1Bottom = d1Top + d1.offsetHeight;
+					var d2Left = d2.offsetLeft;
+					var d2Top = d2.offsetTop;
+					var d2Right = d2Left + d2.offsetWidth;
+					var d2Bottom = d2Top + d2.offsetHeight;
+					dot1.x = this.offsetLeft;
+					dot1.y = this.offsetTop;
+					dot2.x = this.offsetLeft + this.offsetWidth;
+					dot2.y = this.offsetTop;
+					dot3.x = this.offsetLeft + this.offsetWidth;
+					dot3.y = this.offsetTop + this.offsetHeight;
+					dot4.x = this.offsetLeft;
+					dot4.y = this.offsetTop + this.offsetHeight;
+					d1.style.left = left + "px";
+					d1.style.top = top + "px";
+					if(d1Right >= d2Left && d1Bottom >= d2Top && d1Left <= d2Right && d1Top <= d2Bottom) {
+						/*判断矩形四个顶点是否都在圆的四个象限内*/
+						if(dot1.x < centerDot.x && dot2.x < centerDot.x && dot3.x < centerDot.x && dot4.x < centerDot.x && dot1.y < centerDot.y && dot2.y < centerDot.y && dot3.y < centerDot.y && dot4.y < centerDot.y) {
+							var r = Math.sqrt(Math.pow(centerDot.x - dot3.x, 2) + Math.pow(centerDot.y - dot3.y, 2));
+							if(r <= 50)
+								$("#d2").addClass("pp");
+							else
+								$("#d2").removeClass("pp");
+						} else if(dot1.x > centerDot.x && dot2.x > centerDot.x && dot3.x > centerDot.x && dot4.x > centerDot.x && dot1.y < centerDot.y && dot2.y < centerDot.y && dot3.y < centerDot.y && dot4.y < centerDot.y) {
+							var r = Math.sqrt(Math.pow(centerDot.x - dot4.x, 2) + Math.pow(centerDot.y - dot4.y, 2));
+							if(r <= 50)
+								$("#d2").addClass("pp");
+							else
+								$("#d2").removeClass("pp");
+						} else if(dot1.x > centerDot.x && dot2.x > centerDot.x && dot3.x > centerDot.x && dot4.x > centerDot.x && dot1.y > centerDot.y && dot2.y > centerDot.y && dot3.y > centerDot.y && dot4.y > centerDot.y) {
+							var r = Math.sqrt(Math.pow(centerDot.x - dot1.x, 2) + Math.pow(centerDot.y - dot1.y, 2));
+							if(r <= 50)
+								$("#d2").addClass("pp");
+							else
+								$("#d2").removeClass("pp");
+						} else if(dot1.x < centerDot.x && dot2.x < centerDot.x && dot3.x < centerDot.x && dot4.x < centerDot.x && dot1.y > centerDot.y && dot2.y > centerDot.y && dot3.y > centerDot.y && dot4.y > centerDot.y) {
+							var r = Math.sqrt(Math.pow(centerDot.x - dot2.x, 2) + Math.pow(centerDot.y - dot2.y, 2));
+							if(r <= 50)
+								$("#d2").addClass("pp");
+							else
+								$("#d2").removeClass("pp");
+						} else {
+							$("#d2").addClass("pp");
+						}
+
+					} else
+						$("#d2").removeClass("pp");
+
+				}
+				d1.onmouseup = function(e) {
+					d1.onmousemove = null;
+				}
+			}
+		</script>
+	</body>
+
+</html>

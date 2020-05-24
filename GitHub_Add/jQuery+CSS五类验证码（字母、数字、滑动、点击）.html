@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/verify.css" />
+		<title></title>
+	</head>
+	<body>
+		<h3>Common Verify</h3>
+		<div id="verify1" style="margin-top: 30px"></div>
+		<button id="check-btn">Confirm</button>
+		<div id="verify2" style="margin-top: 30px"></div>
+		<button id="check-btn2">Confirm</button>
+		<h3 style="margin-top: 30px">Slide Verify</h3>
+		<div id="verify3" style="margin-top: 30px"></div>
+		<div id="verify4" style="margin-top: 30px"></div>
+		<h3 style="margin-top: 30px">Points Verify</h3>
+		<div id="verify5" style="margin-top: 30px"></div>
+		
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/verify.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#verify1").codeVerify({
+					type: 1,
+					codeLength: 5,
+					width: '200px',
+					height: '30px',
+					fontSize: '30px',
+					btnId: 'check-btn',
+					success: function() {
+						alert("verify 1 match");
+					},
+					error: function() {
+						alert("verify 1 mismatch");
+					}
+				})
+				$("#verify2").codeVerify({
+					type: 2,
+					figure: 100,
+					width: '200px',
+					height: '30px',
+					fontSize: '30px',
+					btnId: 'check-btn2',
+					success: function() {
+						alert("verify 2 match");
+					},
+					error: function() {
+						alert("verify 2 mismatch");
+					}
+				})
+				$("#verify3").slideVerify({
+					type: 1,
+					vOffset: 3,
+					barSize: {
+						width: '300px',
+						height: '40px'
+					},
+					success: function() {
+						alert("verify 3 match");
+					},
+					error: function() {
+						alert("verify 3 mismatch");
+					}
+				})
+				$("#verify4").slideVerify({
+					type: 2,
+					vOffset: 3,
+					imgName: ['1.jpg', '2.jpg'],
+					imgSize: {
+						width: '300px',
+						height: '160px'
+					},
+					blockSize: {
+						width: '30px',
+						height: '30px'
+					},
+					barSize: {
+						width: '300px',
+						height: '30px'
+					},
+					success: function() {
+						alert("verify 3 match");
+					},
+					error: function() {
+						alert("verify 3 mismatch");
+					}
+				})
+				$("#verify5").pointsVerify({
+					defaultNum: 6,
+					checkNum: 4,
+					vSpace: 2,
+					imgName: ['1.jpg', '2.jpg'],
+					imgSize: {
+						width: '300px',
+						height: '160px'
+					},
+					barSize: {
+						width: '300px',
+						height: '30px'
+					},
+					success: function() {
+						alert("verify 5 match");
+					},
+					error: function() {
+						alert("verify 5 mismatch");
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

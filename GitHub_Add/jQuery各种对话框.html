@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/new_file.css" />
+		<link rel="stylesheet" href="src/css/dialog.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="bt"><button id="defDialog">默认对话框</button></div>
+			<div class="bt"><button id="defDialogWithNoPadding">默认对话框，无padding</button></div>
+			<div class="bt"><button id="successToTop">置顶成功弹窗</button></div>
+			<div class="bt"><button id="warningToTop">置顶警告弹窗</button></div>
+			<div class="bt"><button id="msgHide">自动隐藏弹窗</button></div>
+			<div class="bt"><button id="msgNoHide">不自动隐藏弹窗</button></div>
+			<div class="bt"><button id="successAutoHide">成功弹窗自动隐藏</button></div>
+			<div class="bt"><button id="warningAutoHide">警告弹窗自动隐藏</button></div>
+			<div class="bt"><button id="errorAutoHide">错误弹窗自动隐藏</button></div>
+			<div class="bt"><button id="confirm">确认框</button></div>
+			<div class="bt"><button id="confirmCancelConfirm">确认框（取消+确认）</button></div>
+			<div class="bt"><button id="confirmConfirmDelete">确认删除框</button></div>
+			<div class="bt"><button id="confirmIconSuccess">成功Icon确认框</button></div>
+			<div class="bt"><button id="confirmIconWarning">警告Icon确认框</button></div>
+			<div class="bt"><button id="confirmIconError">错误Icon确认框</button></div>
+			<div class="bt"><button id="confirmEscInvalidAutoClose">ESC无效自动关闭提示框</button></div>
+			<div class="bt"><button id="confirmCustomizedConfirmInvalid">自定义内容无效confirm确认框</button></div>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="src/js/jquery.dialog.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#defDialog").click(function() {
+					var content = '<div>' + '内容自定义，但是按钮class不是自定义' + '<div>' + '<button class="j_dialogConfirm">确认</button>' + '&nbsp;<button class="j_dialogCancel">取消</button>' + '</div>' + '</div>';
+					$.dialog({
+						id: "1",
+						title: "title 1",
+						hideHeader: false,
+						hideClose: false,
+						content: content,
+						onConfirm: function() {
+							console.log("default dialog confirmed");
+						},
+						onClose: function() {
+							console.log("default dialog closed");
+						},
+						onCancel: function() {
+							console.log("default dialog canceled");
+						}
+					})
+				})
+				$("#defDialogWithNoPadding").click(function() {
+					var content = '<div>' + '很窄' + '<div>' + '<button class="j_dialogConfirm">确认</button>' + '&nbsp;<button class="j_dialogCancel">取消</button>' + '</div>' + '</div>';
+					$.dialog({
+						id: "2",
+						title: "title 2",
+						content: content,
+						hideHeader: false,
+						hideClose: false,
+						withNoPadding: true,
+						withNoMinWidth: true,
+						onConfirm: function() {
+							console.log("default dialog confirmed");
+						},
+						onCancel: function() {
+							console.log("default dialog canceled");
+						},
+						onClose: function() {
+							console.log("default dialog closed");
+						}
+					})
+				})
+				$("#successToTop").click(function() {
+					$.sendSuccessToTop("恭喜获得'拾粪者'称号", 3000, function() {
+						console.log("successToTop closed");
+					})
+				})
+				$("#warningToTop").click(function() {
+					$.sendWarningToTop("警告你不要碰我肩膀哦", 3000, function() {
+						console.log("warningToTop closed");
+					})
+				})
+				$("#msgHide").click(function() {
+					$.sendMsg("自动隐藏弹窗", 3000, function() {
+						console.log("msgHide closed");
+					})
+				})
+				$("#msgNoHide").click(function() {
+					$.sendMsg("不自动隐藏弹窗", false, function() {
+						console.log("msgNoHide closed");
+					})
+				})
+				$("#successAutoHide").click(function() {
+					$.sendSuccess("成功领到一份****", 3000, function() {
+						console.log("successAutoHide closed");
+					})
+				})
+				$("#warningAutoHide").click(function() {
+					$.sendWarning("请不要吃***", 3000, function() {
+						console.log("warningAutoHide closed");
+					})
+				})
+				$("#errorAutoHide").click(function() {
+					$.sendError("密码错误", 3000, function() {
+						console.log("errorAutoHide closed");
+					})
+				})
+				$("#confirm").click(function() {
+					$.sendConfirm({
+						title: "confirm window",
+						msg: "您确定要删除此软件吗？",
+						desc: "删除此软件后您将不能再用HBuilder敲代码了",
+						button: {
+							confirm: "confirm",
+							cancel: "cancel"
+						},
+						onConfirm: function() {
+							console.log("confirm confirm");
+						},
+						onCancel: function() {
+							console.log("confirm cancel");
+						},
+						onClose: function() {
+							console.log("confirm closed");
+						}
+					})
+				})
+				$("#confirmCancelConfirm").click(function() {
+					$.sendConfirm({
+						title: "confirm cancel confirm",
+						msg: "确认要将性别改为女吗？",
+						withCenter: true,
+						button: {
+							confirm: "confirm",
+							cancel: "cancel",
+							cancelFirst: true
+						},
+						onConfirm: function() {
+							console.log("confirm cancel confirm confirmed");
+						},
+						onCancel: function() {
+							console.log("confirm cancel confirm canceled");
+						},
+						onClose: function() {
+							console.log("confirm cancel confirm closed");
+						}
+					})
+				})
+				$("#confirmConfirmDelete").click(function() {
+					$.sendConfirm({
+						title: "confirm confirm delete",
+						desc: "确认删除word吗？",
+						button: {
+							confirm: "confirm delete",
+							cancel: "cancel"
+						},
+						onConfirm: function() {
+							console.log("confirm confirm delete confirmed");
+						},
+						onClose: function() {
+							console.log("confirm confirm delete closed");
+						},
+						onCancel: function() {
+							console.log("confirm confirm delete canceled");
+						}
+					})
+				})
+				$("#confirmIconSuccess").click(function() {
+					$.sendConfirm({
+						title: "confirm Icon Success",
+						hideHeader: true,
+						desc: "成功提交订单",						
+						withIcon: "withIconSuccess",
+						button: {
+							confirm: "confirm",
+							cancel: null
+						},
+						onConfirm: function() {
+							console.log("confirm icon success confirmed");
+						},
+						onCancel: function() {
+							console.log("confirm icon success canceled");
+						},
+						onClose: function() {
+							console.log("confirm icon success closed");
+						}
+					})
+				})
+				$("#confirmIconWarning").click(function() {
+					$.sendConfirm({
+						title: "confirm Icon warning",
+						hideHeader: true,
+						desc: "您提交的数据有问题",
+						withIcon: "withIconWarning",
+						button: {
+							confirm: "confirm",
+							cancel: null
+						},
+						onConfirm: function() {
+							console.log("confirm icon warning confirmed");
+						},
+						onCancel: function() {
+							console.log("confirm icon warning canceled");
+						},
+						onClose: function() {
+							console.log("confirm icon warning closed");
+						}
+					})
+				})
+				$("#confirmIconError").click(function() {
+					$.sendConfirm({
+						title: "confirm Icon error",
+						hideHeader: true,
+						desc: "您提交的数据错误",
+						withIcon: "withIconError",
+						button: {
+							confirm: "confirm",
+							cancel: null
+						},
+						onConfirm: function() {
+							console.log("confirm icon error confirmed");
+						},
+						onCancel: function() {
+							console.log("confirm icon error canceled");
+						},
+						onClose: function() {
+							console.log("confirm icon error closed");
+						}
+					})
+				})
+				$("#confirmEscInvalidAutoClose").click(function() {
+					$.sendConfirm({
+						title: "confirm esc invalid auto close",
+						desc: "close dialog after three seconds",
+						hideClose: true,
+						withCenter: true,
+						escHide: false,
+						width: 460,
+						button: false,
+						autoClose: true,
+						timeout: 3000,
+						onConfirm: function() {
+							console.log("confirm esc invalid auto close confirmed");
+						},
+						onClose: function() {
+							console.log("confirm esc invalid auto close closed");
+						},
+						onCancel: function() {
+							console.log("confirm esc invalid auto close canceled");
+						}
+					})
+				})
+				$("#confirmCustomizedConfirmInvalid").click(function() {
+					$.sendConfirm({
+						title: "confirm customized confirm invalid",
+						content: "name:<input type='text'  /><br />sex:<input type='text' /><br />tel:<input type='tel' /><br />",
+						button: {
+							confirm: "confirm",
+							cancel: "cancel"
+						},
+						onBeforeConfirm: function() {
+							return false;
+						},
+						onConfirm: function() {
+							console.log("confirm customized confirm invalid confirmed");
+						},
+						onClose: function() {
+							console.log("confirm customized confirm invalid closed");
+						},
+						onCancel: function() {
+							console.log("confirm customized confirm invalid canceled");
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

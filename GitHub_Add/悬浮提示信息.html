@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<link rel="stylesheet" href="css/suspention.css" />
+	</head>
+
+	<body style="background: rgba(255, 255, 204,0.8)">
+		<img id="img1" src="images/question.png" height="24" width="24" style="position: absolute; top: 100px;left: 140px;" />
+		<img id="img2" src="images/question.png" height="24" width="24" style="position: absolute; top: 200px;left: 140px;" />
+		<img id="img3" src="images/question.png" height="24" width="24" style="position: absolute; top: 300px;left: 140px;" />
+		<img id="img4" src="images/question.png" height="24" width="24" style="position: absolute; top: 400px;left: 140px;" />
+
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/suspention.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#img1").suspensionTips({
+					"content": "上方的提示信息",
+					position: "top"
+				});
+				$("#img2").suspensionTips({
+					"content": "右方的提示信息",
+					position: "right"
+				});
+				$("#img3").suspensionTips({
+					"content": "下方的提示信息",
+					position: "bottom"
+				});
+				$("#img4").suspensionTips({
+					"content": "左方的提示信息",
+					position: "left"
+				});
+			})
+		</script>
+	</body>
+
+</html>

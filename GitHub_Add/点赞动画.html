@@ -1,0 +1,56 @@
+<!DOCTYPE html >
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body style="background: rgba(255, 255, 204,0.8);">
+	<button id="thumbsUp" style="-webkit-user-select: none;margin: 50px;background-color: rgba(188, 214, 141,0.8);outline: none;border-radius: 20%;">Thumbs Up</button>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var str = "999";
+			$("#thumbsUp").click(function() {
+				$.tipsBox({
+					obj: $(this),
+					callback: function() {
+						/*alert("clicked");*/
+					}
+				});
+			});
+			$.extend({
+				tipsBox: function(options) {
+					options = $.extend({
+						str: '+' + str,
+						startSize: "12px",
+						endSize: "30px",
+						interval: 600,
+						color: "red"
+					}, options);
+					$("body").append("<span class='number'>" + options.str + "</span>");
+					var box = $(".number");
+					var left = options.obj.offset().left + options.obj.width() / 2;
+					var top = options.obj.offset().top - options.obj.height();
+					box.css({
+						"position": "absolute",
+						"left": left + "px",
+						"top": top + "px",
+						"z-index": 9999,
+						"font-size": options.startSize,
+						"line-height": options.endSize,
+						"color": options.color
+					});
+					box.animate({
+						"font-size": options.endSize,
+						"opacity": "0",
+						"top": top - parseInt(options.endSize) + "px"
+					}, options.interval, function() {
+						box.remove();
+						options.callback();
+					});
+				}
+			});
+		})
+	</script>
+</body>
+</html>

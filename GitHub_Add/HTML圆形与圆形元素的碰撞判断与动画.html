@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<style>
+			@keyframes myFrame {
+				0% {
+					box-shadow: 0px 0px 10px darkred;
+				}
+				10% {
+					box-shadow: 0px 0px 10px red;
+				}
+				20% {
+					box-shadow: 0px 0px 10px orange;
+				}
+				30% {
+					box-shadow: 0px 0px 10px yellow;
+				}
+				40% {
+					box-shadow: 0px 0px 10px greenyellow;
+				}
+				50% {
+					box-shadow: 0px 0px 10px cadetblue;
+				}
+				60% {
+					box-shadow: 0px 0px 10px cornflowerblue;
+				}
+				70% {
+					box-shadow: 0px 0px 10px mediumpurple;
+				}
+				80% {
+					box-shadow: 0px 0px 10px palevioletred;
+				}
+				90% {
+					box-shadow: 0px 0px 10px darkred;
+				}
+				100% {
+					box-shadow: 0px 0px 10px darkred;
+				}
+			}
+			
+			div {
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				border-radius: 50%;
+			}
+			
+			.d1 {
+				left: 20px;
+				top: 20px;
+				background: darkseagreen;
+				z-index: 1;
+			}
+			
+			.d2 {
+				left: 200px;
+				top: 400px;
+				background: antiquewhite;
+				z-index: 0;
+			}
+			
+			.pp {
+				animation: myFrame 4s infinite;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="d1" class="d1"></div>
+		<div id="d2" class="d2"></div>
+		<script>
+			var d1 = document.getElementById("d1");
+			var d2 = document.getElementById("d2");
+			var centerDot2 = new Object();
+			centerDot2.x = d2.offsetLeft + d2.offsetWidth / 2;
+			centerDot2.y = d2.offsetTop + d2.offsetHeight / 2;
+			d1.onmousedown = function(e) {
+				e = e || event;
+				var posX, posY;
+				posX = e.clientX - this.offsetLeft;
+				posY = e.clientY - this.offsetTop;
+				d1.onmousemove = function(e) {
+					var centerDot1 = new Object();
+					var left = e.clientX - posX,
+						top = e.clientY - posY;
+					var r;
+					d1.style.left = left + "px";
+					d1.style.top = top + "px";
+					centerDot1.x = d1.offsetLeft + d1.offsetWidth / 2;
+					centerDot1.y = d1.offsetTop + d1.offsetHeight / 2;
+					r = Math.sqrt(Math.pow(centerDot2.x - centerDot1.x, 2) + Math.pow(centerDot2.y - centerDot1.y, 2));
+					if(r < 100)
+						$("#d2").addClass("pp");
+					else
+						$("#d2").removeClass("pp");
+				}
+				d1.onmouseup = function(e) {
+					d1.onmousemove = null;
+				}
+			}
+		</script>
+	</body>
+
+</html>

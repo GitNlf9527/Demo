@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+	</head>
+
+	<body style="background: rgba(188, 214, 141,0.4);">
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<textarea id="content" name="content" class="toolarea" style="width: 100%;height:400px;background:rgba(255, 255, 204,0.3)"></textarea> <br/>汉字：
+		<span id="zhongwen" class="num">0</span> 个<br /> 中文标点：
+		<span id="zbiaodian" class="num">0</span> 个<br>汉字+标点：<span id="zhongwenbiaodian" class="num">0</span> 个<br /> 英文：
+		<span id="yingwen" class="num">0</span> 个 （含英文状态下的数字、符号、标点）<br> 数字：
+		<span id="shuzi" class="num">0</span> 个<br /> 字符总数：
+		<span id="numwords" class="num">0</span> 个字符
+
+		<script language="javascript">
+			function $(id) {
+				return document.getElementById(id);
+			}
+			var EventUtil = function() {};
+			EventUtil.addEventHandler = function(obj, EventType, Handler) {
+				if(obj.addEventListener) {
+					obj.addEventListener(EventType, Handler, false);
+				} else if(obj.attachEvent) {
+					obj.attachEvent('on' + EventType, Handler);
+				} else {
+					obj['on' + EventType] = Handler;
+				}
+			}
+
+			if($("content")) {
+				EventUtil.addEventHandler($('content'), 'propertychange', CountChineseCharacters);
+				EventUtil.addEventHandler($('content'), 'input', CountChineseCharacters);
+			}
+			window.onload = CountChineseCharacters();
+
+			function showit(Word) {
+				alert(Word);
+			}
+
+			function CountChineseCharacters() {
+				Words = $('content').value;
+				var W = new Object();
+				var Result = new Array();
+				var iNumwords = 0;
+				var sNumwords = 0;
+				var sTotal = 0; //双字节字符;
+				var iTotal = 0; //中文字符；
+				var eTotal = 0; //Ｅ文字符
+				var otherTotal = 0;
+				var bTotal = 0;
+				var inum = 0;
+
+				for(i = 0; i < Words.length; i++) {
+					var c = Words.charAt(i);
+					if(c.match(/[\u4e00-\u9fa5]/)) {
+						if(isNaN(W[c])) {
+							iNumwords++;
+							W[c] = 1;
+						}
+						iTotal++;
+					}
+				}
+				for(i = 0; i < Words.length; i++) {
+					var c = Words.charAt(i);
+					if(c.match(/[^\x00-\xff]/)) {
+						if(isNaN(W[c])) {
+							sNumwords++;
+
+						}
+						sTotal++;
+					} else {
+						eTotal++;
+					}
+					if(c.match(/[0-9]/)) {
+						inum++;
+					}
+				}
+				$('zhongwen').innerText = iTotal;
+				$('zbiaodian').innerText = sTotal - iTotal;
+				$('zhongwenbiaodian').innerText = sTotal;
+				$('yingwen').innerText = eTotal;
+				$('shuzi').innerText = inum;
+				document.getElementById("numwords").innerHTML = iTotal * 2 + (sTotal - iTotal) * 2 + eTotal;
+			}
+		</script>
+	</body>
+</html>

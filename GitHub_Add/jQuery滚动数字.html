@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>		
+		<script type="text/javascript" src="js/TweenLite.min.js" ></script>
+		<script type="text/javascript" src="js/lem_counter.js" ></script>
+		<title></title>
+	</head>
+	<body style="background: rgba(240, 240, 240,0.3);">				
+		<pre>从0数至100:   </pre>
+		<span class="num1" >0</span><br />
+		<button id="btn1" >Start</button><br /><br />
+		
+		<pre>从200倒数至100:   </pre>
+		<span class="num2" >2000</span><br />
+		<button id="btn2" >Start</button><br /><br />
+		
+		<pre>倒数持续5s:   </pre>
+		<span class="num3" >10000</span><br />
+		<button id="btn3" >Start</button><br /><br />
+		
+		<pre>完成更改样式:   </pre>
+		<span class="num4" >500</span><br />
+		<button id="btn4" >Start</button><br />
+				
+		<script>
+			$(document).ready(function(){
+				$("#btn1").click(function(){
+					$(".num1").lemCounter({
+						value_to:100
+					})
+				})
+				$("#btn2").click(function(){
+					$(".num2").lemCounter({
+						value_from:200,
+						value_to:100						
+					})
+				})
+				$("#btn3").click(function(){
+					$(".num3").lemCounter({
+						value_from:10000,
+						value_to:0,
+						animate_duration:5
+					})
+				})
+				$("#btn4").click(function(){
+					$(".num4").lemCounter({
+						value_from:500,
+						value_to:100				
+					})
+					$(".num4").on("onComplete.lc",function(){
+						$(this).css("color","orange")
+					})	
+				})
+			})
+		</script>
+	</body>
+</html>
