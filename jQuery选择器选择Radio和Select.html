@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			body{
+				background: rgba(188, 214, 141, 0.8);
+			}
+		</style>
+		<title></title>
+	</head>
+
+	<body>
+		<label>male:<input class="c1" type="radio" name="sex" value="male" /></label>
+		<label>female:<input class="c1" type="radio" name="sex" value="female" /></label>		
+		<button id="btn_1">radio</button><br />
+		<select id="select">
+			<option>A</option>
+			<option selected="selected">B</option>
+			<option>C</option>
+		</select>
+		<button id="btn_2">select</button>
+		
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#btn_1").click(function() {					
+					alert($("input[name='sex']:checked").val());
+				})
+				$("#btn_2").click(function() {					
+					alert($("#select option:selected").val());
+				})
+			})
+		</script>
+	</body>
+
+</html>

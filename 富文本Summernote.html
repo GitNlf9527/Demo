@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/summernote.css" />
+		<style>
+			.m {
+				width: 800px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="m">
+			<div class="summernote"></div>
+		</div>
+		<button id="btn_mess">get Data</button>
+		
+		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/summernote.js"></script>
+		<script type="text/javascript" src="js/summernote-zh-CN.js"></script>
+		<script>
+			$(function() {
+				$('.summernote').summernote({
+					height: 300,
+					tabsize: 2,
+					lang: 'zh-CN'
+				});
+				$("#btn_mess").click(function(){
+					alert($(".summernote").summernote('code'));
+				})
+			});
+		</script>
+
+	</body>
+
+</html>

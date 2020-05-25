@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/foundation5.5.3.css" />
+		<link rel="stylesheet" href="https://static.runoob.com/assets/foundation-icons/foundation-icons.css" />
+		<style>
+			html,body{
+				height: 4500px;
+			}
+		</style>
+
+	</head>
+	<body style="background:linear-gradient(to top, #c79081 0%, #dfa579 100%);">
+		<div class="off-canvas-wrap" data-offcanvas>
+			<div class="inner-wrap">
+				<nav class="tab-bar">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">滑动导航栏</h1>
+					</section>
+				</nav>
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list test">
+						<li><label>Heading</label></li>
+						<li><a href="#">Link 1</a></li>
+						<li><a href="#">Link 2</a></li>
+						<li><a href="#">Link 3</a></li>
+						<li><a href="#">Link 4</a></li>
+						<li><a href="#">Link 5</a></li>
+						<li><a href="#">Link 6</a></li>
+						<li><a href="#">Link 7</a></li>
+						<li><a href="#">Link 8</a></li>
+					</ul>
+				</aside>
+				<section class="main-section">
+					<h3>菜鸟教程</h3>
+					<p>学的不仅是技术，更是梦想！！！</p>
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div>
+		</div>
+		<h3>按钮</h3>
+		<button type="button" class="button">Default Button</button>
+		<button type="button" class="button disabled">Disabled Button</button>
+		<button type="button" class="button secondary">Secondary</button>
+		<button type="button" class="button success">Success</button>
+		<button type="button" class="button info">Info</button>
+		<button type="button" class="button warning">Warning</button>
+		<button type="button" class="button alert">Alert</button>
+		<h3>按钮组</h3>
+		<ul class="button-group stack">
+			<li><button type="button" class="button">One</button></li>
+			<li><button type="button" class="button">Two</button></li>
+			<li><button type="button" class="button">Three</button></li>
+		</ul>
+		<p></p>
+		<ul class="button-group even-8">
+			<li><button type="button" class="button">A</button></li>
+			<li><button type="button" class="button">B</button></li>
+			<li><button type="button" class="button">C</button></li>
+			<li><button type="button" class="button">D</button></li>
+			<li><button type="button" class="button">E</button></li>
+			<li><button type="button" class="button">F</button></li>
+			<li><button type="button" class="button">G</button></li>
+			<li><button type="button" class="button">H</button></li>
+		</ul>
+		<h3>表格</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Name</th>
+					<th>Sex</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>01</td>
+					<td>ZLM</td>
+					<td>male</td>
+				</tr>
+				<tr>
+					<td>02</td>
+					<td>KS</td>
+					<td>female</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>图片弹窗</h3>
+		<ul class="clearing-thumbs">
+			<li>
+				<a href="images/481BD5C9-1B4A-44B7-BD00-671615F0B5CC(20200330-232.JPG" target="_blank">
+					<img src="images/481BD5C9-1B4A-44B7-BD00-671615F0B5CC(20200330-232.JPG">
+				</a>
+			</li>
+		</ul>
+		<h3>警告框</h3>
+		<div data-alert class="alert-box success">
+			SUCCESS警告框
+			<a href="#" class="close" style="text-decoration:none;">&times;</a>
+		</div>
+		<div data-alert class="alert-box alert">
+			ALERT警告框
+			<a href="#" class="close" style="text-decoration:none;">&times;</a>
+		</div>
+		<h3>进度条</h3>
+		<div class="progress alert">
+			<span class="meter" style="position:relative;width:0%">
+			</span>
+		</div>
+		<div class="progress">
+			<span class="meter" style="position:relative;width:0%">
+			</span>
+		</div>
+		<button id="restore">回复</button>
+		<h3>面板</h3>
+		<div>
+			<div class="medium-6 columns">
+				<div class="panel">
+					<h3>Gray Panel</h3>
+					<p>Panel Text</p>
+				</div>
+			</div>
+			<div class="medium-6 columns">
+				<div class="panel callout">
+					<h3>Blue Panel</h3>
+					<p>Panel Text</p>
+				</div>
+			</div>
+		</div>
+		<h3>下拉菜单</h3>
+		<a href="#" data-dropdown="id01" class="button dropdown success" style="text-decoration:none;">Dropdown Button</a>
+		<ul id="id01" data-dropdown-content class="f-dropdown">
+			<li><a href="#" style="text-decoration:none;">Link 1</a></li>
+			<li><a href="#" style="text-decoration:none;">Link 2</a></li>
+			<li><a href="#" style="text-decoration:none;">Link 3</a></li>
+		</ul>
+		<a href="#" data-dropdown="id01" data-options="align:right" class="button dropdown">右边</a>
+		<ul id="id01" data-dropdown-content class="f-dropdown">
+			<li><a href="#">Link 1</a></li>
+			<li><a href="#">Link 2</a></li>
+			<li><a href="#">Link 3</a></li>
+		</ul>
+
+		<a href="#" data-dropdown="id02" data-options="align:top" class="button dropdown">顶部</a>
+		<ul id="id02" data-dropdown-content class="f-dropdown">
+			<li><a href="#">Link 1</a></li>
+			<li><a href="#">Link 2</a></li>
+			<li><a href="#">Link 3</a></li>
+		</ul>
+
+		<a href="#" data-dropdown="id03" data-options="align:bottom" class="button dropdown">底部</a>
+		<ul id="id03" data-dropdown-content class="f-dropdown">
+			<li><a href="#">Link 1</a></li>
+			<li><a href="#">Link 2</a></li>
+			<li><a href="#">Link 3</a></li>
+		</ul>
+
+		<a href="#" data-dropdown="id04" data-options="align:left" class="button dropdown">左边</a>
+		<ul id="id04" data-dropdown-content class="f-dropdown">
+			<li><a href="#">Link 1</a></li>
+			<li><a href="#">Link 2</a></li>
+			<li><a href="#">Link 3</a></li>
+		</ul>
+		<h3>手风琴效果</h3>
+		<ul class="accordion" data-accordion>
+			<li class="accordion-navigation">
+				<a href="#demo" style="text-decoration:none;">Accordion 1</a>
+				<div id="demo" class="content">
+					<p>link 1</p>
+					<p>link 2</p>
+					<p>link 3</p>
+				</div>
+			</li>
+			<li class="accordion-navigation">
+				<a href="#demo2" style="text-decoration:none;">Accordion 2</a>
+				<div id="demo2" class="content">
+					<p>link 1</p>
+					<p>link 2</p>
+					<p>link 3</p>
+				</div>
+			</li>
+		</ul>
+		<h3>页数控制栏</h3>
+		<div class="pagination-centered">
+			<ul class="pagination">
+				<li class="arrow"><a href="#">«</a></li>
+				<li class="current"><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li class="unavailable"><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li class="arrow"><a href="#">»</a></li>
+			</ul>
+		</div>
+		<h3>价格表</h3>
+		<div class="medium-4 columns">
+			<ul class="pricing-table">
+				<li class="title">Basic</li>
+				<li class="price">$19.99</li>
+				<li class="description">Great for small business</li>
+				<li class="bullet-item">24/7 Support</li>
+				<li class="bullet-item">15GB Storage</li>
+				<li class="bullet-item">1GB Bandwidth</li>
+				<li class="cta-button"><a class="a button" href="#">Sign Up</a></li>
+			</ul>
+		</div>
+		<div class="medium-4 columns">
+			<ul class="pricing-table">
+				<li class="title">Pro</li>
+				<li class="price">$29.99</li>
+				<li class="description">For the Average Joe</li>
+				<li class="bullet-item">24/7 Support</li>
+				<li class="bullet-item">25GB Storage</li>
+				<li class="bullet-item">2GB Bandwidth</li>
+				<li class="cta-button"><a class="a button" href="#">Sign Up</a></li>
+			</ul>
+		</div>
+		<div class="medium-4 columns">
+			<ul class="pricing-table">
+				<li class="title">Premium</li>
+				<li class="price">$49.99</li>
+				<li class="description">When only the best is an option</li>
+				<li class="bullet-item">24/7 Support</li>
+				<li class="bullet-item">Unlimited Storage</li>
+				<li class="bullet-item">Unlimited Bandwidth</li>
+				<li class="cta-button"><a class="a button" href="#">Sign Up</a></li>
+			</ul>
+		</div>
+		</div>
+		<h3>选项卡</h3>
+		<ul class="tabs" data-tab>
+			<li class="tab-title active"><a href="#home">主页</a></li>
+			<li class="tab-title"><a href="#menu1">菜单 1</a></li>
+			<li class="tab-title"><a href="#menu2">菜单 2</a></li>
+			<li class="tab-title"><a href="#menu3">菜单 3</a></li>
+		</ul>
+		<div class="tabs-content">
+			<div class="content active" id="home">
+				<h3>HOME</h3>
+				<p>首页内容。</p>
+			</div>
+			<div class="content" id="menu1">
+				<h3>菜单 1</h3>
+				<p>文本内容。</p>
+			</div>
+			<div class="content" id="menu2">
+				<h3>菜单 2</h3>
+				<p>文本内容。</p>
+			</div>
+			<div class="content" id="menu3">
+				<h3>菜单 3</h3>
+				<p>文本内容。</p>
+			</div>
+		</div>
+		<h3>滑动开关</h3>
+		<div class="switch">
+			<input id="mySwitch1" type="checkbox" checked>
+			<label for="mySwitch1"></label>
+		</div>
+		<div class="switch round">
+			<input id="mySwitch2" type="checkbox" checked>
+			<label for="mySwitch2"></label>
+		</div>
+		<h3>滑块</h3>
+		<div class="row">
+			<div class="medium-12 columns">
+				<div class="row">
+					<div class="small-10 medium-11 columns">
+						<div class="range-slider" data-slider="50" data-options="display_selector:#slider2;">
+							<span class="range-slider-handle" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></span>
+							<span class="range-slider-active-segment" style="width: 50%;"></span>
+						</div>
+					</div>
+					<div class="small-2 medium-1 columns">
+						<span id="slider2" style="display: block;margin-top: 14px;">50</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h3>缩写标签——abb</h3>
+		<p>The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>
+		<h3>引用块——blockquote</h3>
+		<blockquote>
+			<p>学的不仅是技术，更是梦想！</p>
+			<cite>菜鸟教程</cite>
+		</blockquote>
+		<h3>代码片段展示——code</h3>
+		<p>标签: <code>span</code>, <code>div</code>, <code>p</code></p>
+		<h3>水平线——hr</h3>
+		<hr />
+		<h3>图标工具栏(283种图标参考手册：http://suo.im/60QSLo)</h3>
+		<div class="icon-bar five-up">
+			<a href="#" class="item">
+				<i class="fi-home"></i>
+			</a>
+			<a href="#" class="item disabled">
+				<i class="fi-share"></i>
+			</a>
+			<a href="#" class="item">
+				<i class="fi-info"></i>
+			</a>
+			<a href="#" class="item disabled">
+				<i class="fi-mail"></i>
+			</a>
+			<a href="#" class="item">
+				<i class="fi-magnifying-glass"></i>
+			</a>
+		</div>
+		<h3>标签</h3>
+		春日新品
+		<span class="label success">New</span><br />
+		夏日新品
+		<span class="label alert">New</span><br />
+		秋日新品
+		<span class="label warning">New</span><br />
+		冬日新品
+		<span class="label secondary">New</span><br />
+
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<script src="js/foundation5.5.3.js"></script>
+		<script src="js/modernizr.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#restore").click(function() {
+					progress(100, 0);
+				})
+				$(document).foundation();
+			})
+
+			function progress(n, i) {
+				if (i <= n) {
+					setTimeout(function() {
+						$(".meter").css("width", i + "%");
+						progress(n, i + 0.1);
+					}, 10);
+				}
+			}
+		</script>
+	</body>
+</html>
+
