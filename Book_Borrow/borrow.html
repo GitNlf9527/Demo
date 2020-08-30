@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="css/bootstrap4.3.1.css" rel="stylesheet" />
+		<link href="css/borrow.css" rel="stylesheet" />
+		<title></title>
+	</head>
+	<body style="background-color: rgba(255, 255, 204,0.3);">
+		<div id="container">
+			<a href="main.html">Back</a>
+
+			<ul class="nav nav-tabs" style="margin-top: 20px;" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#home">ISBN</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#menu1">Type</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#menu2">Publisher</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="home" class="container tab-pane active"><br>
+					<div class="form-group">
+						<input type="text" class="form-control" id="q_isbn" placeholder="Please input ISBN to find the book">
+					</div>
+				</div>
+				<div id="menu1" class="container tab-pane fade"><br>
+					<div class="form-group">
+						<input type="text" class="form-control" id="q_type" placeholder="Please input type to find the book">
+					</div>
+				</div>
+				<div id="menu2" class="container tab-pane fade"><br>
+					<div class="form-group">
+						<input type="text" class="form-control" id="q_publisher" placeholder="Please input publisher to find the book">
+					</div>
+				</div>
+			</div>
+			<button id="find_confirm" class="btn btn-primary" data-dismiss="modal">query</button>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>ISBN</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Author</th>
+						<th>Publisher</th>
+						<th>Price</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody id="bd"></tbody>
+			</table>
+			<div class="status">
+				<p id="available" class="text-success">Available：</p>
+				<p id="borrowed" class="text-warning">Borrowed：</p>
+			</div>
+		</div>
+
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<script src="js/bootstrap4.3.1.js"></script>
+		<script src="js/popper1.15.0.js"></script>
+
+		<script>
+			var books = JSON.parse(localStorage.getItem("books"))
+			var users = JSON.parse(localStorage.getItem("users"))
+			var load_option = 0
+			$(document).ready(function() {
+				$("#find_confirm").click(function() {
+					load_option = 1
+					$("#bd").empty();
+					var count = 0
+					for (var i = 0; i < books[0].length; i++) {
+						if (books[0][i] == $("#q_isbn").val()) {
+							$("#bd").append("<tr>")
+							for (var k = 0; k <= 6; k++) {
+								$("#bd").append("<td>" + books[k][i] + "</td>")
+								count++;
+							}
+							$("#bd").append("<td><button id='i" + count + "' class='btn btn-primary' type='button'>Borrow</button></td>")
+							$("#bd").append("</tr>")
+						}
+					}
+				})
+				if (load_option == 0) {
+					load_t(0, 6)
+				}
+
+
+				update()
+				for (var i = 0; i < books[0].length; i++) {
+					$("#i" + i).click(function() {
+						if (users.available > 0) {
+							var t = this.id.match(/\d/g);
+							alert("Lend Success!")
+							var now = new Date()
+							var y = now.getFullYear()
+							var m = now.getMonth() + 1
+							var d = now.getDate()
+							books[7][t] = y + "-" + m + "-" + d
+							books[8][t] = y + "-" + (m + 1) + "-" + d
+							users.available = users.available - 1
+							users.borrowed = parseInt(users.borrowed) + 1
+							books[6][t] = books[6][t] - 1
+							localStorage.setItem("users", JSON.stringify(users))
+							localStorage.setItem("books", JSON.stringify(books))
+							update()
+						}
+					})
+				}
+			})
+
+			function load_t(v1, v2) {
+				for (var i = v1; i < books[0].length; i++) {
+					$("#bd").append("<tr>")
+					for (var j = 0; j <= v2; j++) {
+						$("#bd").append("<td>" + books[j][i] + "</td>")
+					}
+					$("#bd").append("<td><button id='i" + i + "' class='btn btn-primary' type='button'>Borrow</button></td>")
+					$("#bd").append("</tr>")
+				}
+			}
+
+			function update() {
+				$("#available").text("available:" + users.available)
+				$("#borrowed").text("borrowed:" + users.borrowed)
+			}
+		</script>
+	</body>
+</html>

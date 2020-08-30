@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<link href="css/verify.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/borrow_head.css" />
+		<link href="css/bootstrap4.3.1.css" rel="stylesheet" />
+		<title></title>
+	</head>
+	<body style="background-color: rgba(255, 255, 204,0.3);">
+		<h1 class="display-4">Book Borrowing System</h1>
+		<div class="container">
+			<form action="">
+				<div class="form-group">
+					<label for="username">Username:</label>
+					<input type="text" class="form-control" name="username" id="username" placeholder="Please input username">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Password:</label>
+					<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Please input password">
+				</div>
+				<div id="verify5" style="margin-top: 30px;margin-left: 30%;margin-bottom: 30px"></div>
+				<div id="btn">
+					<button id="confirm1" class="btn btn-primary" type="submit">Login</button>
+					<label class="week" data-toggle="modal" data-target="#retrieve_password"><a href="#" style="margin-left: 80px;text-decoration: none;">Retrieve
+							password</a></label>
+					<label class="week" data-toggle="modal" data-target="#register"><button class="btn btn-primary" type="button">Register</button></label>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal fade" id="retrieve_password">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Retrieve Password</h4>
+						<button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p class="detail_week"></p>
+						<form>
+							<div class="form-group">
+								<label for="username2">Username:</label>
+								<input type="text" class="form-control" id="username2" placeholder="Please input username">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="retrieve_confirm" class="btn btn-secondary" data-dismiss="modal">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="register">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Register</h4>
+						<button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<form action="">
+							<div class="form-group">
+								<label for="username3">Username:</label>
+								<input type="text" class="form-control" id="username3" placeholder="Please input username">
+							</div>
+							<div class="form-group">
+								<label for="sno">Sno:</label>
+								<input type="text" class="form-control" id="sno" placeholder="Please input sno">
+							</div>
+							<div class="form-group">
+								<label for="pwd2">Password:</label>
+								<input type="password" class="form-control" id="pwd2" placeholder="Please input password">
+							</div>
+							<div class="form-group">
+								<label for="confirm_pwd2">Confirm:</label>
+								<input type="password" class="form-control" id="confirm_pwd2" placeholder="Please confirm password">
+							</div>
+							<div style="text-align: center;">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input checked="checked" type="radio" class="custom-control-input" id="customRadio1" name="example2" value="Student">
+									<label class="custom-control-label" for="customRadio1">Student</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="example2" value="Teacher">
+									<label class="custom-control-label" for="customRadio2">Teacher</label>
+								</div>
+							</div>
+							<button type="button" id="register_confirm" class="btn btn-secondary" data-dismiss="modal">Confirm</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<script src="js/bootstrap4.3.1.js"></script>
+		<script src="js/popper1.15.0.js"></script>
+		<script src="js/verify.js"></script>
+		<script src="mess.json"></script>
+		<script>
+			var books
+			var users
+			$(document).ready(function() {
+				init()
+				$("#confirm1").attr("disabled", "true")
+				$("#verify5").pointsVerify({
+					defaultNum: 6,
+					checkNum: 4,
+					vSpace: 2,
+					imgName: ['1.jpg', '2.jpg'],
+					imgSize: {
+						width: '300px',
+						height: '160px'
+					},
+					barSize: {
+						width: '300px',
+						height: '30px'
+					},
+					success: function() {
+						$("#confirm1").removeAttr("disabled")
+					},
+					error: function() {
+						$("#confirm1").attr("disabled", "true")
+					}
+				})
+				$("#confirm1").click(function() {
+					if ($("#username").val() == users.username && $("#pwd").val() == users.pwd) {
+						alert("Login Success!")
+						window.location.href = "main.html";
+						window.event.returnValue = false;
+					} else {
+						alert("Login Fail!")
+						window.location.href = "head.html";
+						window.event.returnValue = false;
+					}
+				})
+				$("#retrieve_confirm").click(function() {
+					if ($("#username2").val() == users.username) {
+						alert("Your password: "+users.pwd )
+					} else {
+						alert("Your username is not right!")
+					}
+				})
+				$("#register_confirm").click(function(){
+					var u=$("#username3").val()
+					var s=$("#sno").val()
+					var p=$("#pwd2").val()
+					var c=$("#confirm_pwd2").val()
+					var i = $("input[name='example2']:checked").val()
+					if(p!=c){
+						window.location.href = "head.html";
+						window.event.returnValue = false;
+						alert("password is different!")
+					}
+					alert("Congratulations,Register Success!")
+					if(i=="Student"){
+						users.available=5
+					}
+					else{
+						users.available=10
+					}
+					users.username=u
+					users.pwd=p
+					users.sno=s
+					localStorage.setItem("users",JSON.stringify(users))
+				})
+			})
+
+			function init() {
+				books = [
+					["9787507603415", "9787507603215", "9787507963415", "9787507603662", "9787507658214","9787541156397","9787547053683","9787541151705","9787549618705"],
+					["本能", "厚黑学", "人间失格", "意林", "吞噬星空","基本演绎法","朝花夕拾","城南旧事","灵魂摆渡人"],
+					["励志", "哲学", "小说", "哲学", "小说","哲学","文学","文学","心理学"],
+					["贝尔·格里尔斯", "李宗吾", "太宰世", "意林编辑部", "我吃西红柿","刘洪波","鲁迅","林海音","朱佳"],
+					["同心出版社", "中国友谊出版公司", "作家出版社", "辽宁教育出版社", "安徽文艺出版社","四川文艺出版社","万卷出版公司","四川文艺出版社","文汇出版社"],
+					["13.96", "19.50", "18.80", "36.60", "32.00","34.70","30.30","19.80","30.50"],
+					["32", "68", "99", "323", "38","49","45","29","87"],
+					[" ", " ", " ", " ", " "," "," "," "," "],
+					[" ", " ", " ", " ", " "," "," "," "," "]
+				];
+				users = {
+					username: "zlm",
+					pwd: "12345678",
+					sno: "20174221054",
+					available: "5",
+					borrowed: "0"
+				};
+				localStorage.setItem("books",JSON.stringify(books))
+				localStorage.setItem("users",JSON.stringify(users))
+			}
+		</script>
+	</body>
+</html>

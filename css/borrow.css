@@ -1,0 +1,20 @@
+a{
+	font-size: 25px;
+	margin-left: 20px;
+}
+form{
+	width: 300px;
+	margin-left: 42%;
+	margin-bottom: 20px;
+}
+form button{
+	margin-left: 38%;
+}
+.status p{
+	float: left;
+	margin-left: 25%;
+}
+#find_confirm{
+	margin-left: 45%;
+	margin-bottom: 10px;
+}
